@@ -11,3 +11,18 @@ import UIKit
 class JsonParser: NSObject {
 
 }
+ 
+class BankAppModel:NSObject{
+    
+    public var label : String?
+    public var attributes : Attributes?
+    
+    
+    
+}
+
+
+
+//예외: image type: array type
+
+//모든 타입: label or attribuite
