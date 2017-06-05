@@ -21,9 +21,6 @@
  
 import UIKit
 
-class JsonParser: NSObject {
-
-}
 
 struct BankAppModel{
 
@@ -38,12 +35,12 @@ struct BankAppModel{
 //    public var link : Link?
 //    public var id : Id?
 //    public var im_artist : Im:artist?
-//    public var category : Category?
-//    public var im_releaseDate : Im:releaseDate?
+    public var category : Category?
+    //public var im_releaseDate : Im_releaseDate?
     
-//    public var im_name : im_name?
-//    public var im_image : Array<Im:image>?
-//    public var summary : Summary?
+ 
+ 
+ 
 //    public var im_price : Im_price?
 //    public var im_contentType : Im:contentType?
 //    public var rights : Rights?
@@ -56,9 +53,59 @@ struct BankAppModel{
     
 }
 
+let kLabel:String = "label"
+
+extension BankAppModel{
+    
+    init?(json:[String:Any]){
+        
+        // step 1 ------------------------------------------
+        
+        guard let nameJson = json["im:name"] as? [String:Any]  ,
+            let summaryJson = json["summary"] as? [String:Any]  ,
+            let titleJson = json["title"] as? [String:Any],
+            let imageArrayJson = json["im:image"] as? [Any]
+            
+            else{
+                return nil
+        }
+        
+        // step 2 ------------------------------------------
+        
+        guard let nameLabel = nameJson[kLabel] as? String ,
+            let summaryLabel = summaryJson[kLabel] as? String ,
+            let titleLabel = titleJson[kLabel] as? String
+            
+            else{
+                return nil
+        }
+        
+        // parse image array -------------------------------
+        
+        var imageCollector:[imageModel] = []
+        
+        for image in imageArrayJson{
+            
+            if let imageDic = image as? [String:Any] {
+                
+                if let imgModel = imageModel(json: imageDic){
+                    imageCollector.append(imgModel)
+                }
+            }
+            
+        }
+        
+        //summarize  ---------------------------------------
+        
+        self.im_name = nameLabel
+        self.summary = summaryLabel
+        self.title = titleLabel
+        self.images = imageCollector
+    }
+}
+
 struct imageModel{
     
-    let kLabel:String = "label"
     
     public let url:URL
     public let height:CGFloat
@@ -71,68 +118,16 @@ struct imageModel{
         }
         
         let heightVal : CGFloat? = Double(height).map{ CGFloat($0) }
- 
-        self.url = URL(fileURLWithPath: imageLabel)
+  
+        self.url = URL(string: imageLabel)!
         
         guard let heights = heightVal else {
             return nil
         }
         
         self.height = CGFloat( heights  )
-        
     }
 }
-
-extension BankAppModel{
-    
-    init?(json:[String:Any]){
-    
-        let kLabel:String = "label"
-       
-        // step 1
-        
-        guard let nameJson = json["im:name"] as? [String:Any]  ,
-            let summaryJson = json["summary"] as? [String:Any]  ,
-            let titleJson = json["title"] as? [String:Any],
-            let imageArrayJson = json["im:image"] as? [Any]
-        
-        else{
-             return nil
-        }
-        
-        // step 2
-        
-        guard let nameLabel = nameJson[kLabel] as? String ,
-            let summaryLabel = summaryJson[kLabel] as? String ,
-            let titleLabel = titleJson[kLabel] as? String
-        
-        else{
-            return nil
-        }
-        
-        // parse image array
-        
-        var imageCollector:[imageModel] = []
-        
-        for image in imageArrayJson{
-            
-           if let imageDic = image as? [String:Any] {
-            
-            if let imgModel = imageModel(json: imageDic){
-                imageCollector.append(imgModel)
-            }
-           }
-            
-        }
-        
-        //summarize
-        self.im_name = nameLabel
-        self.summary = summaryLabel
-        self.title = titleLabel
-        self.images = imageCollector
-    }
-}
-
 
 
 

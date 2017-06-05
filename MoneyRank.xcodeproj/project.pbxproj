@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		126C5D341EE446CA009E11AC /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126C5D331EE446CA009E11AC /* JsonParser.swift */; };
+		126C5D341EE446CA009E11AC /* BankAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126C5D331EE446CA009E11AC /* BankAppModel.swift */; };
 		12D7A48E1EE19EFC0089C7FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D7A48D1EE19EFC0089C7FC /* AppDelegate.swift */; };
 		12D7A4931EE19EFC0089C7FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D7A4911EE19EFC0089C7FC /* Main.storyboard */; };
 		12D7A4951EE19EFC0089C7FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12D7A4941EE19EFC0089C7FC /* Assets.xcassets */; };
 		12D7A4981EE19EFC0089C7FC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D7A4961EE19EFC0089C7FC /* LaunchScreen.storyboard */; };
 		12D7A4A01EE1B9F80089C7FC /* RankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D7A49F1EE1B9F80089C7FC /* RankCell.swift */; };
-		12D7A4A21EE1BAD40089C7FC /* FinanceTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D7A4A11EE1BAD40089C7FC /* FinanceTableVC.swift */; };
+		12D7A4A21EE1BAD40089C7FC /* FinanceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D7A4A11EE1BAD40089C7FC /* FinanceTableViewController.swift */; };
+		6D7843231EE5156D001E08BA /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7843221EE5156D001E08BA /* DetailTableViewController.swift */; };
+		A1D0B5836DE54E89465BD915 /* Pods_MoneyRank.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149ECB028402070E3601FD9C /* Pods_MoneyRank.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		126C5D331EE446CA009E11AC /* JsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
+		126C5D331EE446CA009E11AC /* BankAppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankAppModel.swift; sourceTree = "<group>"; };
 		12D7A48A1EE19EFC0089C7FC /* MoneyRank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyRank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12D7A48D1EE19EFC0089C7FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12D7A4921EE19EFC0089C7FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -25,7 +27,11 @@
 		12D7A4971EE19EFC0089C7FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12D7A4991EE19EFC0089C7FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12D7A49F1EE1B9F80089C7FC /* RankCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RankCell.swift; sourceTree = "<group>"; };
-		12D7A4A11EE1BAD40089C7FC /* FinanceTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceTableVC.swift; sourceTree = "<group>"; };
+		12D7A4A11EE1BAD40089C7FC /* FinanceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinanceTableViewController.swift; sourceTree = "<group>"; };
+		149ECB028402070E3601FD9C /* Pods_MoneyRank.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoneyRank.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		15C303DF590355A57B0BF2E0 /* Pods-MoneyRank.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyRank.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoneyRank/Pods-MoneyRank.release.xcconfig"; sourceTree = "<group>"; };
+		6D7843221EE5156D001E08BA /* DetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
+		EDE7BBF20137E841E4E480B4 /* Pods-MoneyRank.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyRank.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoneyRank/Pods-MoneyRank.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1D0B5836DE54E89465BD915 /* Pods_MoneyRank.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +58,8 @@
 			children = (
 				12D7A48C1EE19EFC0089C7FC /* MoneyRank */,
 				12D7A48B1EE19EFC0089C7FC /* Products */,
+				15BFD027036D3141C95E37D6 /* Pods */,
+				608DCEB19E1F2DF9D7DE4A46 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,14 +77,32 @@
 				12D7A48D1EE19EFC0089C7FC /* AppDelegate.swift */,
 				12D7A49F1EE1B9F80089C7FC /* RankCell.swift */,
 				12D7A4911EE19EFC0089C7FC /* Main.storyboard */,
-				12D7A4A11EE1BAD40089C7FC /* FinanceTableVC.swift */,
-				126C5D331EE446CA009E11AC /* JsonParser.swift */,
+				12D7A4A11EE1BAD40089C7FC /* FinanceTableViewController.swift */,
+				6D7843221EE5156D001E08BA /* DetailTableViewController.swift */,
+				126C5D331EE446CA009E11AC /* BankAppModel.swift */,
 				126C5D351EE44E7F009E11AC /* tunesModel */,
 				12D7A4941EE19EFC0089C7FC /* Assets.xcassets */,
 				12D7A4961EE19EFC0089C7FC /* LaunchScreen.storyboard */,
 				12D7A4991EE19EFC0089C7FC /* Info.plist */,
 			);
 			path = MoneyRank;
+			sourceTree = "<group>";
+		};
+		15BFD027036D3141C95E37D6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EDE7BBF20137E841E4E480B4 /* Pods-MoneyRank.debug.xcconfig */,
+				15C303DF590355A57B0BF2E0 /* Pods-MoneyRank.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		608DCEB19E1F2DF9D7DE4A46 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				149ECB028402070E3601FD9C /* Pods_MoneyRank.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,9 +112,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 12D7A49C1EE19EFC0089C7FC /* Build configuration list for PBXNativeTarget "MoneyRank" */;
 			buildPhases = (
+				32886CF7079D9366F4CCDFDF /* [CP] Check Pods Manifest.lock */,
 				12D7A4861EE19EFC0089C7FC /* Sources */,
 				12D7A4871EE19EFC0089C7FC /* Frameworks */,
 				12D7A4881EE19EFC0089C7FC /* Resources */,
+				4B20A08AC579DB2820E2FBA2 /* [CP] Embed Pods Frameworks */,
+				313CCC1422E20A384EBF58CD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -146,14 +176,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		313CCC1422E20A384EBF58CD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MoneyRank/Pods-MoneyRank-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		32886CF7079D9366F4CCDFDF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		4B20A08AC579DB2820E2FBA2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MoneyRank/Pods-MoneyRank-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		12D7A4861EE19EFC0089C7FC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12D7A4A21EE1BAD40089C7FC /* FinanceTableVC.swift in Sources */,
+				12D7A4A21EE1BAD40089C7FC /* FinanceTableViewController.swift in Sources */,
+				6D7843231EE5156D001E08BA /* DetailTableViewController.swift in Sources */,
 				12D7A48E1EE19EFC0089C7FC /* AppDelegate.swift in Sources */,
-				126C5D341EE446CA009E11AC /* JsonParser.swift in Sources */,
+				126C5D341EE446CA009E11AC /* BankAppModel.swift in Sources */,
 				12D7A4A01EE1B9F80089C7FC /* RankCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +352,7 @@
 		};
 		12D7A49D1EE19EFC0089C7FC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDE7BBF20137E841E4E480B4 /* Pods-MoneyRank.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L938T5Q7J8;
@@ -286,6 +366,7 @@
 		};
 		12D7A49E1EE19EFC0089C7FC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15C303DF590355A57B0BF2E0 /* Pods-MoneyRank.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = L938T5Q7J8;

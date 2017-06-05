@@ -12,7 +12,7 @@ let kRankHeight:CGFloat = 100
 
 class FinanceTableViewController: UITableViewController {
   
-    var appModels:[BankAppModel]?
+    var appModels:[BankAppModel] = []
     
     typealias apiResult = (URLResponse? , Data?) -> Void
     
@@ -51,7 +51,7 @@ class FinanceTableViewController: UITableViewController {
                                     
                                         if let model = BankAppModel(json: item)  {
                                         
-                                            self.appModels?.append(model)
+                                            self.appModels.append(model)
                                     
                                         }
                                     }
@@ -60,7 +60,7 @@ class FinanceTableViewController: UITableViewController {
                             } //end of parsing Array.
                             print("api done🔥")
                             
-                            if self.appModels?.isEmpty == false {
+                            if self.appModels.isEmpty == false {
                                 
                                 DispatchQueue.global(qos: .userInitiated).async{
                                  
@@ -100,21 +100,32 @@ class FinanceTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: rankCellIdentifier, for: indexPath) as! RankCell
         //let cell = tableView.dequeueReusableCell(withIdentifier: rankCellIdentifier ) as! RankCell
         
-        guard let models = self.appModels else {
-            return cell
-        }
-        let model = models[indexPath.row]
+        if self.appModels.isEmpty { return cell }
         
-        cell.titleLabel?.text = model.title
-        cell.rankLabel?.text = "\(indexPath.row)"
+        let model = self.appModels[indexPath.row]
+        
+        cell.bindData(model, rank: indexPath.row)
         
         return cell
         
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "DetailTableViewController") as! DetailTableViewController
+ 
+        if self.appModels.isEmpty { return  }
+ 
+        let model = self.appModels[indexPath.row]
+        detailVC.bindData(model, rank: indexPath.row)
+        
+        self.navigationController!.pushViewController(detailVC, animated: true)
+        print("something")
+ 
+    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return (self.appModels?.count)!
+        return (self.appModels .count)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
