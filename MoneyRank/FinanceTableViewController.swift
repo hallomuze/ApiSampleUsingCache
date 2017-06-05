@@ -112,13 +112,15 @@ class FinanceTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "DetailTableViewController") as! DetailTableViewController
+        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
  
         if self.appModels.isEmpty { return  }
- 
-        let model = self.appModels[indexPath.row]
-        detailVC.bindData(model, rank: indexPath.row)
         
+        let model = self.appModels[indexPath.row]
+        //detailVC.bindData(model, rank: indexPath.row)
+        
+        
+        detailVC.model = model
         self.navigationController!.pushViewController(detailVC, animated: true)
         print("something")
  
