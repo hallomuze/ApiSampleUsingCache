@@ -8,9 +8,11 @@
 
 import UIKit
 
+let kRankHeight:CGFloat = 100
+
 class FinanceTableViewController: UITableViewController {
- 
-    var appTitles:[String]?
+  
+    var appModels:[BankAppModel]?
     
     typealias apiResult = (URLResponse? , Data?) -> Void
     
@@ -18,7 +20,7 @@ class FinanceTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        appTitles = []
+        appModels = []
         
         let resultClosure : apiResult = {
             
@@ -45,30 +47,26 @@ class FinanceTableViewController: UITableViewController {
                                 
                                 for item in entrySeed { //12개 중에 하나의 딕셔너리에 해당함. 예) 0번째에 해당.
                                     
-                                    if let item = item as? [String:Any]{ //딕셔너리 타입으로 변환후
+                                     if let item = item as? [String:Any]{
+                                    
+                                        if let model = BankAppModel(json: item)  {
                                         
-                                        if let item = item["im:name"] as? [String:Any] {   // 첫째 딕리서러ㅣ 가져옴.
-                                            
-                                            if let name = item["label"] as? String {
-                                                
-                                                print("what...\(name)")
-                                                
-                                                self.appTitles?.append(name)
-                                                
-                                            }
+                                            self.appModels?.append(model)
+                                    
                                         }
                                     }
+                                    
                                 }
                             } //end of parsing Array.
                             print("api done🔥")
                             
-                            if self.appTitles?.isEmpty == false {
+                            if self.appModels?.isEmpty == false {
                                 
                                 DispatchQueue.global(qos: .userInitiated).async{
-                                
+                                 
                                     DispatchQueue.main.async {
                                 
-                                    self.tableView.reloadData()
+                                        self.tableView.reloadData()
                                     }
                                 }
                                 
@@ -102,17 +100,13 @@ class FinanceTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: rankCellIdentifier, for: indexPath) as! RankCell
         //let cell = tableView.dequeueReusableCell(withIdentifier: rankCellIdentifier ) as! RankCell
         
-        print ("rororororor ")
-        
-        if let titles = self.appTitles  {
-            
-            let title = titles[indexPath.row]
-            
-            cell.titleLabel?.text = title
-            cell.rankLabel?.text = "\(indexPath.row)"
-            
-            print ("cell.rankLabel?.text is \(cell.rankLabel?.text)")
+        guard let models = self.appModels else {
+            return cell
         }
+        let model = models[indexPath.row]
+        
+        cell.titleLabel?.text = model.title
+        cell.rankLabel?.text = "\(indexPath.row)"
         
         return cell
         
@@ -120,13 +114,19 @@ class FinanceTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return (self.appTitles?.count)!
+        return (self.appModels?.count)!
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
   
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return kRankHeight
+    }
+    
+    
  
     func requestHttp(_ handler:@escaping apiResult){
         
