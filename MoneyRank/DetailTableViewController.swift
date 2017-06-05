@@ -84,6 +84,10 @@ class DetailVC: UIViewController {
     }
 
     
-    //view 의 height 는 equal 로 하면 문제 계속 발생함. width 만 동일하게 하고,
+    // view 의 height 는 equal 로 하면 문제 계속 발생함. width 만 동일하게 하고,
     // 나머지 4 left, top, right, left 를 0으로 하면 됨.
+    
+    // # 이슈: UILabel을 stackView 바로 안속에 집어 넣을 때 좌우측 margin 을 주면 계속 autolayout conflict 발생했음
+    // # 해결. 추가로 view 를 만들고 ( 상하좌우 모두 0 으로 설정 )
+    // 그 view 속에 label을 만들고, 상하 20정도 , 좌우 15로 했더니 문제 해결됨.
 }

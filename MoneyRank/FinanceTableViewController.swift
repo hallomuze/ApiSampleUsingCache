@@ -173,4 +173,68 @@ class FinanceTableViewController: UITableViewController {
 
 }
 
+/*
+ 
+ 애플에서 JSON 처리법
+ 
+ https://developer.apple.com/swift/blog/?id=37
+ 
+ 
+ How to use IBInspectable to adjust values in Interface Builder
+ https://www.hackingwithswift.com/example-code/uikit/how-to-use-ibinspectable-to-adjust-values-in-interface-builder
+ 
+ 디버깅팁:
+ http://ryanipete.com/blog/ios/swift/objective-c/uidebugginginformationoverlay/
+ 
+ imageView 에 블러처리
+ https://stackoverflow.com/questions/5084845/how-to-set-the-opacity-alpha-of-a-uiimage
+ 
+ 
+ 비동기 로딩:
+ 
+ http://blog.saltfactory.net/async-upload-url-image-using-gcd/
+ 
+ 
+ 
+self.scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
+self.scrollView.center = self.view.center
+self.scrollView.contentMode = .scaleAspectFit
+
+self.scrollView.delegate = self
+self.scrollView.minimumZoomScale = 0.5
+self.scrollView.maximumZoomScale = 5.0
+self.scrollView.zoomScale = 1.0
+self.scrollView.showsHorizontalScrollIndicator = true
+self.scrollView.showsVerticalScrollIndicator = true
+self.scrollView.alwaysBounceVertical = true
+self.scrollView.alwaysBounceHorizontal = true
+self.scrollView.bounces = true
+self.scrollView.bouncesZoom = true
+self.scrollView.clipsToBounds = true
+self.scrollView.flashScrollIndicators()
+self.imageView.image = UIImage(named: "offline")
+self.imageView.center = self.scrollView.center
+
+self.scrollView.contentSize = self.imageView.bounds.size
+self.scrollView.autoresizingMask = [UIViewAutoresizing.flexibleWidth,UIViewAutoresizing.flexibleHeight]
+
+self.scrollView.addSubview(self.imageView)
+self.view.addSubview(self.scrollView)
+
+func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    return self.imageView
+}
+
+func scrollViewDidZoom(_ scrollView: UIScrollView) {
+    
+    let imageViewSize = self.imageView.frame.size
+    let scrollViewSize = self.scrollView.bounds.size
+    
+    let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
+    let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
+    
+    self.scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
+}
+*/
+ 
  
