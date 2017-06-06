@@ -139,21 +139,7 @@ class AppInfoVC: UIViewController {
         super.viewDidLoad()
  
         self.automaticallyAdjustsScrollViewInsets = false
-    
-        
-//        var homeButton : UIBarButtonItem = UIBarButtonItem(title: "LeftButtonTitle", style: UIBarButtonItemStyle.Plain, target: self, action: "")
-//        
-//        var logButton : UIBarButtonItem = UIBarButtonItem(title: "RigthButtonTitle", style: UIBarButtonItemStyle.Plain, target: self, action: "")
-//        
-//        self.navigationItem.leftBarButtonItem = homeButton
-//        
-//        
-//        
-//        lett done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(YourController.done))
-//        navigationItem.setLeftBarButtonItem(done, animated: false)
-//        
-//        
-//        self.navigationController?.navigationItem.leftBarButtonItem?.title = "앱 순위"
+     
         debugPrint("id is\(self.identifier)")
         
         guard let id = self.identifier else {

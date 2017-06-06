@@ -113,7 +113,9 @@ extension BankAppModel{
 struct imageModel{
     
     public let url:URL
+    public let urlString:String
     public let height:CGFloat
+    
     
     init?(json:[String:Any]){
         
@@ -123,7 +125,8 @@ struct imageModel{
         }
         
         let heightVal : CGFloat? = Double(height).map{ CGFloat($0) }
-  
+
+        self.urlString = imageLabel
         self.url = URL(string: imageLabel)!
         
         guard let heights = heightVal else {

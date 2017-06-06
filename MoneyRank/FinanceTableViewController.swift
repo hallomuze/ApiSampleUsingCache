@@ -152,10 +152,7 @@ class FinanceTableViewController: UITableViewController {
  
     }
 
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        
-//        navigationItem.title = "앱 순위"
-//    }
+ 
 }
 
 /*
