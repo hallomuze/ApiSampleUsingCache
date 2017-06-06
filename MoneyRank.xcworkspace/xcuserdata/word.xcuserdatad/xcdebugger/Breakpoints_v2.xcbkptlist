@@ -6,15 +6,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoneyRank/AppInfoVC.swift"
-            timestampString = "518404852.989174"
+            timestampString = "518412320.423121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -22,7 +22,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoneyRank/AppDetailModel.swift"
@@ -38,15 +38,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoneyRank/AppInfoVC.swift"
-            timestampString = "518404852.989174"
+            timestampString = "518412320.423121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -54,46 +54,46 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoneyRank/AppInfoVC.swift"
-            timestampString = "518404852.989174"
+            timestampString = "518412320.423121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "MoneyRank.AppInfoVC.(viewDidLoad () -&gt; ()).(closure #1)"
                   moduleName = "MoneyRank"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/word/Dropbox/_HR_KBank/MoneyRankApp/MoneyRank/AppInfoVC.swift"
-                  timestampString = "518404034.989212"
+                  timestampString = "518406522.733114"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "90"
-                  endingLineNumber = "90"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
                   offsetFromSymbolStart = "4064">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "MoneyRank.AppInfoVC.(viewDidLoad () -&gt; ()).(closure #1)"
                   moduleName = "MoneyRank"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/word/Dropbox/_HR_KBank/MoneyRankApp/MoneyRank/AppInfoVC.swift"
-                  timestampString = "518404034.99333"
+                  timestampString = "518406522.735973"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "90"
-                  endingLineNumber = "90"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
                   offsetFromSymbolStart = "5204">
                </Location>
             </Locations>
@@ -102,49 +102,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoneyRank/AppInfoVC.swift"
+            timestampString = "518412320.423121"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "prettify()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MoneyRank/AppDetailModel.swift"
-            timestampString = "518400357.39077"
+            filePath = "MoneyRank/PrettyUI.swift"
+            timestampString = "518406521.428506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "init(json:)"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "applyAttrLabelAndGetHeight(aString:label:lineSpacing:width:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MoneyRank.AppDetailModel.init (json : Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; MoneyRank.AppDetailModel"
-                  moduleName = "MoneyRank"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/word/Dropbox/_HR_KBank/MoneyRankApp/MoneyRank/AppDetailModel.swift"
-                  timestampString = "518404035.001581"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "204"
-                  endingLineNumber = "204"
-                  offsetFromSymbolStart = "7524">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MoneyRank.AppDetailModel.init (json : Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; MoneyRank.AppDetailModel"
-                  moduleName = "MoneyRank"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/word/Dropbox/_HR_KBank/MoneyRankApp/MoneyRank/AppDetailModel.swift"
-                  timestampString = "518404035.005779"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "204"
-                  endingLineNumber = "204"
-                  offsetFromSymbolStart = "7876">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoneyRank/PrettyUI.swift"
+            timestampString = "518406553.126255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "applyAttrLabelAndGetHeight(aString:label:lineSpacing:width:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -154,12 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoneyRank/AppInfoVC.swift"
-            timestampString = "518404852.989174"
+            timestampString = "518412320.423121"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "prettify()"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "updateUI(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

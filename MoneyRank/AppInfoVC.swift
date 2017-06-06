@@ -19,7 +19,10 @@ class AppInfoVC: UIViewController {
     @IBOutlet weak var descLabel: UILabel!
     //var appModel:AppDetailModel?
     @IBOutlet weak var whatsNewLabel: UILabel!
+    @IBOutlet weak var swipableContainerView: UIView!
     
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var descLabelHeightConstraint: NSLayoutConstraint!
     var identifier:String?
  
     var jsonResult:apiResult?
@@ -33,9 +36,8 @@ class AppInfoVC: UIViewController {
             
                 self.titleLabel.text = model.trackName
                 self.contentRatingLabel.text = model.contentAdvisoryRating
-                self.makerLabel.numberOfLines = 0
-                self.makerLabel.text = model.artistName
                 
+                self.makerLabel.text = model.artistName
                 
                 let imageUrl = URL(string:model.artworkUrl60)
                 self.thumbImageView.sd_setImage(with: imageUrl , completed: nil)
@@ -47,8 +49,45 @@ class AppInfoVC: UIViewController {
                 self.view.updateConstraintsIfNeeded()
                 //print("url:\(imageUrl)")
                 
-        
+ 
+//                let width = self.makerLabel.bounds.size.width
+//                let labelHeight = PrettyUI.applyAttrLabelAndGetHeight( aString: model.artistName, label: self.makerLabel, lineSpacing: 3, width: width )
+//
+//                self.makerLabel.translatesAutoresizingMaskIntoConstraints = false
+//                self.descLabelHeightConstraint.constant = labelHeight
+
                 
+                UIView.animate(withDuration: 3.0,
+                                           delay: 0.0,
+                                           usingSpringWithDamping: 0.3,
+                                           initialSpringVelocity: 10.0,
+                                           options: .curveLinear,
+                                           animations: { () -> Void in
+                                            self.stackView.invalidateIntrinsicContentSize()
+                                            //self.widthConstraint.constant = (self.compressed == false) ? 100.0 : 200.0
+                                            //self.compressed = !self.compressed
+                                            self.makerLabel.numberOfLines = 0
+                                            self.view.layoutIfNeeded()
+                                            
+                                            self.view.setNeedsUpdateConstraints()
+                                            self.view.updateConstraintsIfNeeded()
+                                            
+                }, completion: nil)
+                
+                
+                for vc in self.childViewControllers{
+                     //print (view )
+                    if vc is AppImageCollectionVC {
+                        
+                       let collectionVC = vc as! AppImageCollectionVC
+                        collectionVC.imageURLs = model.screenshotUrls
+                        collectionVC.collectionView?.reloadData()
+                        
+                    }
+                }
+                
+                
+
             }
         }
     }
@@ -56,6 +95,7 @@ class AppInfoVC: UIViewController {
     override func updateViewConstraints() {
         super.updateViewConstraints()
         self.view.updateConstraintsIfNeeded()
+        self.view.setNeedsLayout()
     }
 //    -(void)updateViewConstraints {
 //    [super updateViewConstraints];
