@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Finance Table View Controller-->
+        <!--금융 무료 앱 순위-->
         <scene sceneID="6wB-9i-4A2">
             <objects>
                 <tableViewController id="Oi5-4x-j5L" customClass="FinanceTableViewController" customModule="MoneyRank" customModuleProvider="target" sceneMemberID="viewController">
@@ -37,16 +37,16 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="vUS-z4-7kJ">
-                                            <rect key="frame" x="99" y="0.5" width="263" height="41"/>
+                                            <rect key="frame" x="99" y="0.0" width="263" height="42"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CId-yJ-vce">
-                                                    <rect key="frame" x="0.0" y="0.0" width="33.5" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="34" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDZ-oy-xcm">
-                                                    <rect key="frame" x="0.0" y="20.5" width="68" height="20.5"/>
+                                                    <rect key="frame" x="0.0" y="21" width="68" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -83,7 +83,9 @@
                             <outlet property="delegate" destination="Oi5-4x-j5L" id="PSr-AA-MCP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Iet-B2-fzD"/>
+                    <navigationItem key="navigationItem" title="금융 무료 앱 순위" id="Iet-B2-fzD">
+                        <barButtonItem key="backBarButtonItem" title="무료 앱 순위" id="OeL-8a-nfw"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="25t-wV-GIT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -501,7 +503,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vPT-bL-tMP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4292" y="461.46926536731638"/>
+            <point key="canvasLocation" x="3970" y="329"/>
         </scene>
         <!--DetailVC legacy-->
         <scene sceneID="dij-AU-0I6">
@@ -826,7 +828,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAO-Xg-cw9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5320.8000000000002" y="683.65817091454278"/>
+            <point key="canvasLocation" x="4700" y="328"/>
         </scene>
     </scenes>
 </document>

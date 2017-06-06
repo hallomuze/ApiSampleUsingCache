@@ -15,10 +15,16 @@ class FinanceTableViewController: UITableViewController {
     var appModels:[BankAppModel] = []
      
     let rankCellIdentifier = "RankCell"
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // navigationItem.title = "금융 카테고리 무료 앱 순위"
+
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "무료 금융 카테고리 앱 순위"
         appModels = []
          
         let resultClosure : apiResult = {
@@ -84,10 +90,8 @@ class FinanceTableViewController: UITableViewController {
         
         
         let urlString = "https://itunes.apple.com/kr/rss/topfreeapplications/limit=50/genre=6015/json"
-
-        
+ 
         APIService.sharedInstance.requestHttp(urlString: urlString, handler: resultClosure)
-        
         
     }
   
@@ -114,7 +118,8 @@ class FinanceTableViewController: UITableViewController {
         let model = self.appModels[indexPath.row]
         
         detailVC.identifier = model.identifier
-  
+        
+       // self.navigationItem.title = "앱 순위"
         self.navigationController!.pushViewController(detailVC, animated: true)
    
     }
@@ -147,6 +152,10 @@ class FinanceTableViewController: UITableViewController {
  
     }
 
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        
+//        navigationItem.title = "앱 순위"
+//    }
 }
 
 /*

@@ -140,6 +140,20 @@ class AppInfoVC: UIViewController {
  
         self.automaticallyAdjustsScrollViewInsets = false
     
+        
+//        var homeButton : UIBarButtonItem = UIBarButtonItem(title: "LeftButtonTitle", style: UIBarButtonItemStyle.Plain, target: self, action: "")
+//        
+//        var logButton : UIBarButtonItem = UIBarButtonItem(title: "RigthButtonTitle", style: UIBarButtonItemStyle.Plain, target: self, action: "")
+//        
+//        self.navigationItem.leftBarButtonItem = homeButton
+//        
+//        
+//        
+//        lett done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(YourController.done))
+//        navigationItem.setLeftBarButtonItem(done, animated: false)
+//        
+//        
+//        self.navigationController?.navigationItem.leftBarButtonItem?.title = "앱 순위"
         debugPrint("id is\(self.identifier)")
         
         guard let id = self.identifier else {
@@ -148,6 +162,7 @@ class AppInfoVC: UIViewController {
         }
 
         self.prettify()
+        
         let url : String  = "https://itunes.apple.com/lookup?id=\(id)&country=kr"
         
         APIService.sharedInstance.requestHttp(urlString: url) { (response, data) in
@@ -185,30 +200,26 @@ class AppInfoVC: UIViewController {
     @IBAction func actionMoreDesc(_ sender: UIButton) {
         
         self.stackView.invalidateIntrinsicContentSize()
-        //self.widthConstraint.constant = (self.compressed == false) ? 100.0 : 200.0
-        //self.compressed = !self.compressed
+        
         self.descLabel.numberOfLines = 0
         self.view.layoutIfNeeded()
         
         //self.view.setNeedsUpdateConstraints()
         //self.view.updateConstraintsIfNeeded()
+        
         self.descMoreButton.isHidden = true
         
-        UIView.animate(withDuration: 0.2,
-                       delay: 0.0,
-                       usingSpringWithDamping: 0.0,
-                       initialSpringVelocity: 10.0,
-                       options: .curveLinear,
-                       animations: { () -> Void in
-                        
-                        
-        }, completion: nil)
+//        UIView.animate(withDuration: 0.2,
+//                       delay: 0.0,
+//                       usingSpringWithDamping: 0.0,
+//                       initialSpringVelocity: 10.0,
+//                       options: .curveLinear,
+//                       animations: { () -> Void in
+//                        
+//                        
+//        }, completion: nil)
         
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+   
 
 }

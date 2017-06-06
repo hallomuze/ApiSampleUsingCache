@@ -17,7 +17,6 @@ class RankCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         self.selectionStyle = .none
         self.appImageView.layer.cornerRadius = 15
         self.appImageView.layer.borderWidth = 0.5
@@ -25,13 +24,7 @@ class RankCell: UITableViewCell {
         self.appImageView.clipsToBounds = true
 
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
+ 
     public func bindData (_ model: BankAppModel , rank:Int ){
         self.titleLabel?.text = model.title
         self.rankLabel?.text = "\(rank)"

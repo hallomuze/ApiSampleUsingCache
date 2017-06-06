@@ -23,8 +23,6 @@ public class APIService: NSObject {
         
         let sessionConfiguration = URLSessionConfiguration.default
         
-        //let urlString = "https://itunes.apple.com/kr/rss/topfreeapplications/limit=50/genre=6015/json"
-        
         guard let encodeString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else{
             return
         }

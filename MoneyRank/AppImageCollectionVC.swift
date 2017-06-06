@@ -26,15 +26,7 @@ class AppImageCollectionVC: UICollectionViewController {
 
         // Do any additional setup after loading the view.
     }
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    
-
+ 
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -53,8 +45,6 @@ class AppImageCollectionVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ImagesCollectionCell
-     
-        //cell.backgroundColor = UIColor.gray
         
         if let images = self.imageURLs {
             let imageLocation = images[indexPath.row]
@@ -62,8 +52,7 @@ class AppImageCollectionVC: UICollectionViewController {
             cell.appImageView.sd_setImage(with: url, completed: nil)
             
         }
-        // Configure the cell
-    
+        
         return cell
     }
  
@@ -72,8 +61,6 @@ class AppImageCollectionVC: UICollectionViewController {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        // let image = UIImage(named: carImages[indexPath.row])
-        //        return image!.size
         return CGSize(width:self.view.bounds.width / 2  , height:300)
         
     }
