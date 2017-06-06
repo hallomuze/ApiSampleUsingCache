@@ -39,7 +39,7 @@ class FinanceTableViewController: UITableViewController {
                                 print("title:\(finalTitle!) , icon:\(finalIcon!)")
                             }
                             
-                            //array 타입의 entryu
+                            //array 타입의 entry
                             
                             if let entrySeed = feed["entry"] as? [Any] {    //배열구해오고.
                                 
@@ -95,7 +95,6 @@ class FinanceTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: rankCellIdentifier, for: indexPath) as! RankCell
-        //let cell = tableView.dequeueReusableCell(withIdentifier: rankCellIdentifier ) as! RankCell
         
         if self.appModels.isEmpty { return cell }
         
@@ -110,19 +109,13 @@ class FinanceTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "AppInfoVC") as! AppInfoVC
-        //let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "AppInfoVC ") as! AppInfoVC
-        
-        //if self.appModels.isEmpty { return cell }
         
         let model = self.appModels[indexPath.row]
         
         detailVC.identifier = model.identifier
-        
-//        let itunesId = model.i
+  
         self.navigationController!.pushViewController(detailVC, animated: true)
-         
-
- 
+   
     }
     
    
@@ -147,12 +140,10 @@ class FinanceTableViewController: UITableViewController {
         if self.appModels.isEmpty { return  }
         
         let model = self.appModels[indexPath.row]
-        //detailVC.bindData(model, rank: indexPath.row)
-        
-        
+  
         detailVC.model = model
         self.navigationController!.pushViewController(detailVC, animated: true)
-        print("something")
+ 
     }
 
 }
