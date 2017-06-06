@@ -12,10 +12,13 @@ class AppInfoVC: UIViewController {
 
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var makerLabel: UILabel!
     @IBOutlet weak var contentRatingLabel: UILabel!
     
+    @IBOutlet weak var thumbImageView: UIImageView!
+    @IBOutlet weak var descLabel: UILabel!
     //var appModel:AppDetailModel?
-    
+    @IBOutlet weak var whatsNewLabel: UILabel!
     
     var identifier:String?
  
@@ -30,34 +33,60 @@ class AppInfoVC: UIViewController {
             
                 self.titleLabel.text = model.trackName
                 self.contentRatingLabel.text = model.contentAdvisoryRating
+                self.makerLabel.numberOfLines = 0
+                self.makerLabel.text = model.artistName
+                
+                
+                let imageUrl = URL(string:model.artworkUrl60)
+                self.thumbImageView.sd_setImage(with: imageUrl , completed: nil)
+            
+                self.descLabel.text = model.description
+                self.whatsNewLabel.text = model.releaseNotes
+                
+                self.view.layoutIfNeeded()
+                self.view.updateConstraintsIfNeeded()
+                //print("url:\(imageUrl)")
+                
+        
+                
             }
         }
     }
     
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        self.view.updateConstraintsIfNeeded()
+    }
+//    -(void)updateViewConstraints {
+//    [super updateViewConstraints];
+//    lbExplain.preferredMaxLayoutWidth = self.view.bounds.size.width - 40;
+//    }
     
     func prettify(){
         
         contentRatingLabel.layer.borderColor = UIColor.black.cgColor
         contentRatingLabel.layer.borderWidth = 1
         
+        thumbImageView.layer.cornerRadius = 50
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.prettify()
-        
+ 
         self.automaticallyAdjustsScrollViewInsets = false
     
-        print("id is\(self.identifier)")
+        debugPrint("id is\(self.identifier)")
         
         guard let id = self.identifier else {
             
             return
         }
+
+        self.prettify()
         let url : String  = "https://itunes.apple.com/lookup?id=\(id)&country=kr"
         
         APIService.sharedInstance.requestHttp(urlString: url) { (response, data) in
-     
+            
             //debugPrint(data)
             
             guard let data = data else {
@@ -90,13 +119,7 @@ class AppInfoVC: UIViewController {
                  print("err\(error)")
                 
             }
-                        
- 
-            
         }
-            
-         
-        
     }
 
     override func didReceiveMemoryWarning() {

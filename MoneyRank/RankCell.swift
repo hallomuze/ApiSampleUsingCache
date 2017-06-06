@@ -18,6 +18,7 @@ class RankCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        self.selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,7 +32,7 @@ class RankCell: UITableViewCell {
         self.rankLabel?.text = "\(rank)"
         
         guard let imageUrl = model.images.last?.url else { return }
-        print("url:\(imageUrl)")
+        //print("url:\(imageUrl)")
         self.appImageView.sd_setImage(with: imageUrl , completed: nil)
         
     }

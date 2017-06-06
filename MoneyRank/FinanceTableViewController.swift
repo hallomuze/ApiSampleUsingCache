@@ -19,7 +19,7 @@ class FinanceTableViewController: UITableViewController {
         super.viewDidLoad()
         
         appModels = []
-        
+         
         let resultClosure : apiResult = {
             
             if let data = $1 {  //data

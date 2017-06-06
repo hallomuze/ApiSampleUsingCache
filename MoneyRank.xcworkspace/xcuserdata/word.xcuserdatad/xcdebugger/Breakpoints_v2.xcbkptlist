@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoneyRank/AppInfoVC.swift"
-            timestampString = "518400036.530319"
+            timestampString = "518404852.989174"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoneyRank/AppInfoVC.swift"
-            timestampString = "518399990.640926"
+            timestampString = "518404852.989174"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoneyRank/AppInfoVC.swift"
-            timestampString = "518399990.640926"
+            timestampString = "518404852.989174"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Locations>
@@ -70,31 +70,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.URLResponse&gt;, Swift.Optional&lt;Foundation.Data&gt;) -&gt; () in MoneyRank.AppInfoVC.viewDidLoad() -&gt; ()"
+                  symbolName = "MoneyRank.AppInfoVC.(viewDidLoad () -&gt; ()).(closure #1)"
                   moduleName = "MoneyRank"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/word/Dropbox/_HR_KBank/MoneyRankApp/MoneyRank/AppInfoVC.swift"
-                  timestampString = "518399715.038559"
+                  timestampString = "518404034.989212"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "81"
-                  endingLineNumber = "81"
-                  offsetFromSymbolStart = "5012">
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "4064">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;__C.URLResponse&gt;, Swift.Optional&lt;Foundation.Data&gt;) -&gt; () in MoneyRank.AppInfoVC.viewDidLoad() -&gt; ()"
+                  symbolName = "MoneyRank.AppInfoVC.(viewDidLoad () -&gt; ()).(closure #1)"
                   moduleName = "MoneyRank"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/word/Dropbox/_HR_KBank/MoneyRankApp/MoneyRank/AppInfoVC.swift"
-                  timestampString = "518399715.041442"
+                  timestampString = "518404034.99333"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "81"
-                  endingLineNumber = "81"
-                  offsetFromSymbolStart = "6208">
+                  startingLineNumber = "90"
+                  endingLineNumber = "90"
+                  offsetFromSymbolStart = "5204">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -112,6 +112,54 @@
             startingLineNumber = "204"
             endingLineNumber = "204"
             landmarkName = "init(json:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoneyRank.AppDetailModel.init (json : Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; MoneyRank.AppDetailModel"
+                  moduleName = "MoneyRank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/word/Dropbox/_HR_KBank/MoneyRankApp/MoneyRank/AppDetailModel.swift"
+                  timestampString = "518404035.001581"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "7524">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MoneyRank.AppDetailModel.init (json : Swift.Dictionary&lt;Swift.String, Any&gt;) throws -&gt; MoneyRank.AppDetailModel"
+                  moduleName = "MoneyRank"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/word/Dropbox/_HR_KBank/MoneyRankApp/MoneyRank/AppDetailModel.swift"
+                  timestampString = "518404035.005779"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "7876">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MoneyRank/AppInfoVC.swift"
+            timestampString = "518404852.989174"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "prettify()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
