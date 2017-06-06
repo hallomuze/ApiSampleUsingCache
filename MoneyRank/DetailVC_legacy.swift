@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailVC: UIViewController {
+class DetailVC_legacy: UIViewController {
 
     @IBOutlet weak var appTitleLabel: UILabel!
     @IBOutlet weak var appMakerLabel: UILabel!
@@ -53,7 +53,7 @@ class DetailVC: UIViewController {
         self.appDescLabel!.text = model.summary
         
         guard let imageUrl = model.images.last?.url else { return }
-        print("url:\(imageUrl)")
+        //print("url:\(imageUrl)")
         self.appImageView.sd_setImage(with: imageUrl , completed: nil)
         
         

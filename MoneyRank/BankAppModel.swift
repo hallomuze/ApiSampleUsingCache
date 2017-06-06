@@ -38,7 +38,7 @@ struct BankAppModel{
     public var category : Category?
     //public var im_releaseDate : Im_releaseDate?
     
- 
+    public var identifier:String
  
  
 //    public var im_price : Im_price?
@@ -54,6 +54,7 @@ struct BankAppModel{
 }
 
 let kLabel:String = "label"
+public typealias jsonDic = [String:Any]
 
 extension BankAppModel{
     
@@ -64,8 +65,9 @@ extension BankAppModel{
         guard let nameJson = json["im:name"] as? [String:Any]  ,
             let summaryJson = json["summary"] as? [String:Any]  ,
             let titleJson = json["title"] as? [String:Any],
-            let imageArrayJson = json["im:image"] as? [Any]
-            
+            let imageArrayJson = json["im:image"] as? [Any],
+        let idJson  = json["id"] as? [String:Any]
+        
             else{
                 return nil
         }
@@ -74,7 +76,10 @@ extension BankAppModel{
         
         guard let nameLabel = nameJson[kLabel] as? String ,
             let summaryLabel = summaryJson[kLabel] as? String ,
-            let titleLabel = titleJson[kLabel] as? String
+            let titleLabel = titleJson[kLabel] as? String,
+        
+        let idAttributes = idJson["attributes"] as? jsonDic,
+        let identifier = idAttributes["im:id"]as? String
             
             else{
                 return nil
@@ -101,11 +106,11 @@ extension BankAppModel{
         self.summary = summaryLabel
         self.title = titleLabel
         self.images = imageCollector
+        self.identifier = identifier
     }
 }
 
 struct imageModel{
-    
     
     public let url:URL
     public let height:CGFloat

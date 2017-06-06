@@ -13,9 +13,7 @@ let kRankHeight:CGFloat = 100
 class FinanceTableViewController: UITableViewController {
   
     var appModels:[BankAppModel] = []
-    
-    typealias apiResult = (URLResponse? , Data?) -> Void
-    
+     
     let rankCellIdentifier = "RankCell"
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,16 +81,15 @@ class FinanceTableViewController: UITableViewController {
             } //end of dollar 1
         }
         
-        self.requestHttp(resultClosure)
+        
+        let urlString = "https://itunes.apple.com/kr/rss/topfreeapplications/limit=50/genre=6015/json"
+
+        
+        APIService.sharedInstance.requestHttp(urlString: urlString, handler: resultClosure)
         
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
+  
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,19 +109,23 @@ class FinanceTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "DetailVC") as! DetailVC
- 
-        if self.appModels.isEmpty { return  }
+        let detailVC = self.storyboard?.instantiateViewController(withIdentifier: "AppInfoVC") as! AppInfoVC
+        //let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "AppInfoVC ") as! AppInfoVC
+        
+        //if self.appModels.isEmpty { return cell }
         
         let model = self.appModels[indexPath.row]
-        //detailVC.bindData(model, rank: indexPath.row)
         
+        detailVC.identifier = model.identifier
         
-        detailVC.model = model
+//        let itunesId = model.i
         self.navigationController!.pushViewController(detailVC, animated: true)
-        print("something")
+         
+
  
     }
+    
+   
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return (self.appModels .count)
@@ -138,37 +139,20 @@ class FinanceTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return kRankHeight
     }
-    
-    
  
-    func requestHttp(_ handler:@escaping apiResult){
+    
+    func legacy( indexPath: IndexPath){
+        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "DetailVC_legacy") as! DetailVC_legacy
         
-        let sessionConfiguration = URLSessionConfiguration.default;
+        if self.appModels.isEmpty { return  }
         
-        let urlString = "https://itunes.apple.com/kr/rss/topfreeapplications/limit=50/genre=6015/json"
+        let model = self.appModels[indexPath.row]
+        //detailVC.bindData(model, rank: indexPath.row)
         
-        guard let encodeString = urlString.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else{
-            return
-        }
         
-        guard let url = URL(string: encodeString) else {
-            return
-        }
-        
-        var request = URLRequest(url:url)
-        request.httpMethod = "GET"
-        
-        let urlSession = URLSession(
-            configuration:sessionConfiguration, delegate: nil, delegateQueue: nil)
-        
-        let sessionTask = urlSession.dataTask(with:request){
-            (data,response,error) in
-            
-            handler(response,data)
-        }
-        
-        sessionTask.resume()
-        
+        detailVC.model = model
+        self.navigationController!.pushViewController(detailVC, animated: true)
+        print("something")
     }
 
 }
