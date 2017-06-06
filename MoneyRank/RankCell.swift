@@ -22,6 +22,7 @@ class RankCell: UITableViewCell {
         self.appImageView.layer.cornerRadius = 15
         self.appImageView.layer.borderWidth = 0.5
         self.appImageView.layer.borderColor = UIColor.lightGray.cgColor
+        self.appImageView.clipsToBounds = true
 
     }
 
@@ -36,7 +37,6 @@ class RankCell: UITableViewCell {
         self.rankLabel?.text = "\(rank)"
         
         guard let imageUrl = model.images.last?.url else { return }
-        //print("url:\(imageUrl)")
         self.appImageView.sd_setImage(with: imageUrl , completed: nil)
         
     }

@@ -57,7 +57,7 @@ class FinanceTableViewController: UITableViewController {
                                     
                                 }
                             } //end of parsing Array.
-                            print("api done🔥")
+                            
                             
                             if self.appModels.isEmpty == false {
                                 

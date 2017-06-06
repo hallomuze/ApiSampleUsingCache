@@ -18,7 +18,9 @@ class AppInfoVC: UIViewController {
     @IBOutlet weak var starLabel: UILabel!
     @IBOutlet weak var thumbImageView: UIImageView!
     @IBOutlet weak var descLabel: UILabel!
-    //var appModel:AppDetailModel?
+    @IBOutlet weak var descMoreButton: UIButton!
+    
+    @IBOutlet weak var descFakeLabel: UILabel!
     
     //what's new
     @IBOutlet weak var whatsNewDate: UILabel!
@@ -50,8 +52,6 @@ class AppInfoVC: UIViewController {
             
             DispatchQueue.main.async {
             
-                
-                
                 
                 self.titleLabel.text = model.trackName
                 self.contentRatingLabel.text = model.contentAdvisoryRating
@@ -117,15 +117,12 @@ class AppInfoVC: UIViewController {
         }
     }
     
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-        self.view.updateConstraintsIfNeeded()
-        self.view.setNeedsLayout()
-    }
-//    -(void)updateViewConstraints {
-//    [super updateViewConstraints];
-//    lbExplain.preferredMaxLayoutWidth = self.view.bounds.size.width - 40;
+//    override func updateViewConstraints() {
+//        super.updateViewConstraints()
+//        self.view.updateConstraintsIfNeeded()
+//        self.view.setNeedsLayout()
 //    }
+ 
     
     func prettify(){
         
@@ -187,20 +184,23 @@ class AppInfoVC: UIViewController {
 
     @IBAction func actionMoreDesc(_ sender: UIButton) {
         
+        self.stackView.invalidateIntrinsicContentSize()
+        //self.widthConstraint.constant = (self.compressed == false) ? 100.0 : 200.0
+        //self.compressed = !self.compressed
+        self.descLabel.numberOfLines = 0
+        self.view.layoutIfNeeded()
+        
+        //self.view.setNeedsUpdateConstraints()
+        //self.view.updateConstraintsIfNeeded()
+        self.descMoreButton.isHidden = true
+        
         UIView.animate(withDuration: 0.2,
                        delay: 0.0,
                        usingSpringWithDamping: 0.0,
                        initialSpringVelocity: 10.0,
                        options: .curveLinear,
                        animations: { () -> Void in
-                        self.stackView.invalidateIntrinsicContentSize()
-                        //self.widthConstraint.constant = (self.compressed == false) ? 100.0 : 200.0
-                        //self.compressed = !self.compressed
-                        self.descLabel.numberOfLines = 0
-                        self.view.layoutIfNeeded()
                         
-                        self.view.setNeedsUpdateConstraints()
-                        self.view.updateConstraintsIfNeeded()
                         
         }, completion: nil)
         
