@@ -24,7 +24,7 @@ let description_suffix: String = "description"
 
 let features_suffix = "features"
 
-let fileSizeBytes_suffic : String = "fileSizeBytes"
+let fileSizeBytes_suffix : String = "fileSizeBytes"
 let formattedPrice_suffix : String = "formattedPrice"
 let genreIds_suffix :String = "genreIds"//   ( 6015, 6012 );
 let genres_suffix : String = "genres"
@@ -74,7 +74,7 @@ struct AppDetailModel    {
     
     //var features : [String]?
     
-//    var fileSizeBytes : String
+    var fileSizeBytes : String
 //    var formattedPrice : String
     //var genreIds : [String] //   ( 6015, 6012 );
     //var genres : [String]
@@ -104,7 +104,7 @@ struct AppDetailModel    {
     var trackName : String
     var trackViewUrl : String
     var userRatingCount : Int
-    var userRatingCountForCurrentVersion : Int
+    var userRatingCountForCurrentVersion : Int?
     var version : String
     var wrapperType : String
     
@@ -178,6 +178,12 @@ extension AppDetailModel {
         }
         self.description = description
         
+        guard let fileSizeBytes = json[fileSizeBytes_suffix] as? String else {
+            throw jsonError.missing(fileSizeBytes_suffix)
+        }
+        self.fileSizeBytes = fileSizeBytes
+        
+        
         guard let primaryGenreName = json[primaryGenreName_suffix] as? String else {
             throw jsonError.missing(primaryGenreName_suffix)
         }
@@ -243,10 +249,12 @@ extension AppDetailModel {
         self.userRatingCount = userRatingCount
         
         
-        guard let userRatingCountForCurrentVersion = json[userRatingCountForCurrentVersion_suffix] as? Int else {
-            throw jsonError.missing(userRatingCountForCurrentVersion_suffix)
+        if let userRatingCountForCurrentVersion = json[userRatingCountForCurrentVersion_suffix] as? Int   {
+          
+            self.userRatingCountForCurrentVersion = userRatingCountForCurrentVersion
         }
-        self.userRatingCountForCurrentVersion = userRatingCountForCurrentVersion
+        
+        //warning... if let 등은 바로 쓰면 crash
         
         
         guard let version = json[version_suffix] as? String else {

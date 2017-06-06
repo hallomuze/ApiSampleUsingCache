@@ -19,6 +19,10 @@ class RankCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         self.selectionStyle = .none
+        self.appImageView.layer.cornerRadius = 15
+        self.appImageView.layer.borderWidth = 0.5
+        self.appImageView.layer.borderColor = UIColor.lightGray.cgColor
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -15,14 +15,30 @@ class AppInfoVC: UIViewController {
     @IBOutlet weak var makerLabel: UILabel!
     @IBOutlet weak var contentRatingLabel: UILabel!
     
+    @IBOutlet weak var starLabel: UILabel!
     @IBOutlet weak var thumbImageView: UIImageView!
     @IBOutlet weak var descLabel: UILabel!
     //var appModel:AppDetailModel?
-    @IBOutlet weak var whatsNewLabel: UILabel!
-    @IBOutlet weak var swipableContainerView: UIView!
     
+    //what's new
+    @IBOutlet weak var whatsNewDate: UILabel!
+    @IBOutlet weak var whatsNewLabel: UILabel!
+    
+    @IBOutlet weak var swipableContainerView: UIView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var descLabelHeightConstraint: NSLayoutConstraint!
+    
+    //information
+    @IBOutlet weak var developerLabel: UILabel!
+    
+    @IBOutlet weak var categoryLabel: UILabel!
+    
+    
+    @IBOutlet weak var updatedLastLabel: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
+    
+    @IBOutlet weak var sizeOfAppLabel: UILabel!
+    @IBOutlet weak var langLabel: UILabel!
     var identifier:String?
  
     var jsonResult:apiResult?
@@ -34,16 +50,40 @@ class AppInfoVC: UIViewController {
             
             DispatchQueue.main.async {
             
+                
+                
+                
                 self.titleLabel.text = model.trackName
                 self.contentRatingLabel.text = model.contentAdvisoryRating
                 
+                if let starVal = model.averageUserRatingForCurrentVersion {
+                   self.starLabel.text = String(repeating: "⭐️", count: starVal)
+                }else{
+                    self.starLabel.text = "no star!!"
+                }
                 self.makerLabel.text = model.artistName
                 
                 let imageUrl = URL(string:model.artworkUrl60)
                 self.thumbImageView.sd_setImage(with: imageUrl , completed: nil)
             
+                // What's new
                 self.descLabel.text = model.description
                 self.whatsNewLabel.text = model.releaseNotes
+                self.whatsNewDate.text = model.currentVersionReleaseDate
+                
+                // Information
+                self.developerLabel.text = model.artistName
+                self.categoryLabel.text = model.primaryGenreName
+                self.updatedLastLabel.text = model.currentVersionReleaseDate
+                //self.sizeOfAppLabel.text = model.f
+                //self.langLabel.text = model.
+                
+                let fileSizeAsInt = Int64(model.fileSizeBytes)
+                
+                let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount:fileSizeAsInt!, countStyle: .file)
+                //print("File Size: \(fileSizeWithUnit)")
+                self.sizeOfAppLabel.text = "\(fileSizeWithUnit)"
+                
                 
                 self.view.layoutIfNeeded()
                 self.view.updateConstraintsIfNeeded()
@@ -57,22 +97,7 @@ class AppInfoVC: UIViewController {
 //                self.descLabelHeightConstraint.constant = labelHeight
 
                 
-                UIView.animate(withDuration: 3.0,
-                                           delay: 0.0,
-                                           usingSpringWithDamping: 0.3,
-                                           initialSpringVelocity: 10.0,
-                                           options: .curveLinear,
-                                           animations: { () -> Void in
-                                            self.stackView.invalidateIntrinsicContentSize()
-                                            //self.widthConstraint.constant = (self.compressed == false) ? 100.0 : 200.0
-                                            //self.compressed = !self.compressed
-                                            self.makerLabel.numberOfLines = 0
-                                            self.view.layoutIfNeeded()
-                                            
-                                            self.view.setNeedsUpdateConstraints()
-                                            self.view.updateConstraintsIfNeeded()
-                                            
-                }, completion: nil)
+               
                 
                 
                 for vc in self.childViewControllers{
@@ -104,10 +129,13 @@ class AppInfoVC: UIViewController {
     
     func prettify(){
         
-        contentRatingLabel.layer.borderColor = UIColor.black.cgColor
+        contentRatingLabel.layer.borderColor = UIColor.darkGray.cgColor
         contentRatingLabel.layer.borderWidth = 1
         
-        thumbImageView.layer.cornerRadius = 50
+        thumbImageView.layer.cornerRadius = 25
+        thumbImageView.layer.borderColor = UIColor.lightGray.cgColor
+        thumbImageView.layer.borderWidth = 1
+        
         
     }
     override func viewDidLoad() {
@@ -145,23 +173,38 @@ class AppInfoVC: UIViewController {
                         
                         }catch{
                         
-                            print("err\(error)")
+                            print("exception :\(error)")
                         }
-                        
-                       // debugPrint(topmost)
-                        
-                       
                     }
             }
 
             }catch{
                 
-                 print("err\(error)")
-                
+                 print("exception :\(error)")
             }
         }
     }
 
+    @IBAction func actionMoreDesc(_ sender: UIButton) {
+        
+        UIView.animate(withDuration: 0.2,
+                       delay: 0.0,
+                       usingSpringWithDamping: 0.0,
+                       initialSpringVelocity: 10.0,
+                       options: .curveLinear,
+                       animations: { () -> Void in
+                        self.stackView.invalidateIntrinsicContentSize()
+                        //self.widthConstraint.constant = (self.compressed == false) ? 100.0 : 200.0
+                        //self.compressed = !self.compressed
+                        self.descLabel.numberOfLines = 0
+                        self.view.layoutIfNeeded()
+                        
+                        self.view.setNeedsUpdateConstraints()
+                        self.view.updateConstraintsIfNeeded()
+                        
+        }, completion: nil)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

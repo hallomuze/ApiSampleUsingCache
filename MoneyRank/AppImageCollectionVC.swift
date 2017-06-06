@@ -54,8 +54,7 @@ class AppImageCollectionVC: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ImagesCollectionCell
      
-        
-        cell.backgroundColor = UIColor.gray
+        //cell.backgroundColor = UIColor.gray
         
         if let images = self.imageURLs {
             let imageLocation = images[indexPath.row]
@@ -67,13 +66,17 @@ class AppImageCollectionVC: UICollectionViewController {
     
         return cell
     }
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
-    {
-        return CGSize(width: collectionView.frame.size.width/3.2, height: 180)
+ 
+    //IB: floow: Horizontal,paging
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        // let image = UIImage(named: carImages[indexPath.row])
+        //        return image!.size
+        return CGSize(width:self.view.bounds.width / 2  , height:300)
+        
     }
-   
-  
 
     // MARK: UICollectionViewDelegate
 

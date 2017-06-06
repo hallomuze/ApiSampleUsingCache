@@ -18,6 +18,7 @@ class FinanceTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "무료 금융 카테고리 앱 순위"
         appModels = []
          
         let resultClosure : apiResult = {
