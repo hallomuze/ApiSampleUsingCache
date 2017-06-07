@@ -18,11 +18,6 @@ class FinanceTableViewController: UITableViewController {
     
     var cache:NSCache<AnyObject, AnyObject>!
     
-    override func viewWillAppear(_ animated: Bool) {
-        // navigationItem.title = "금융 카테고리 무료 앱 순위"
-
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         appModels = []
@@ -98,36 +93,65 @@ class FinanceTableViewController: UITableViewController {
         
         //image caching ----------
         
-        //indexPath  구하고,
-        let cacheObjKey = indexPath.row as AnyObject
-        if self.cache.object(forKey: cacheObjKey ) != nil {
+        let idxPathKey = indexPath.row as AnyObject //캐시키로 사용.
+        
+        if self.cache.object(forKey: idxPathKey ) != nil {
             
-            let cachedImage = self.cache.object(forKey: cacheObjKey)
+            let cachedImage = self.cache.object(forKey: idxPathKey)
             
             cell.appImageView.image = cachedImage as? UIImage
             
         }else{
             
-            URLSession.shared.dataTask(with: imgUrl, completionHandler: { (data, response, error) in
-                
+            URLSession.shared.downloadTask(with: imgUrl, completionHandler: { (url, response , error ) in
                 if (error != nil) {
                      return
                 }
                 
-                if let imgData = data ,let image = UIImage(data: imgData ) {
+                guard let data = try? Data(contentsOf: imgUrl) else {
+                    return
+                }
+                
+                DispatchQueue.main.async{ [unowned self] in
                     
-                    DispatchQueue.main.async { [unowned self] in
+                    guard let visibleCell = self.tableView.cellForRow(at: indexPath) as? RankCell else {
+                        return
+                    }
+                    
+                    if let imageFound = UIImage(data:data) {
                         
-                        guard let cell = self.tableView.cellForRow(at: indexPath) as? RankCell else { //should be here
-                            return
-                        }
-                        cell.appImageView.image = image
-                        self.cache.setObject(image, forKey: cacheObjKey)
+                        visibleCell.appImageView.image = imageFound
+                        self.cache.setObject(imageFound , forKey:idxPathKey )
                     }
                 }
                 
             }).resume()
-        } 
+            
+        }
+        
+            
+//            
+//            
+//            URLSession.shared.dataTask(with: imgUrl, completionHandler: { (data, response, error) in
+//                
+//                if (error != nil) {
+//                     return
+//                }
+//                
+//                if let imgData = data ,let image = UIImage(data: imgData ) {
+//                    
+//                    DispatchQueue.main.async { [unowned self] in
+//                        
+//                        guard let cell = self.tableView.cellForRow(at: indexPath) as? RankCell else { //should be here
+//                            return
+//                        }
+//                        cell.appImageView.image = image
+//                        self.cache.setObject(image, forKey: cacheObjKey)
+//                    }
+//                }
+//                
+//            }).resume()
+//        }
         
 //        let rowNumKey = indexPath.row as AnyObject  //to makes int "conform" AnyObject
 //        
