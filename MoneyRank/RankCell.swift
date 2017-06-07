@@ -22,14 +22,16 @@ class RankCell: UITableViewCell {
         self.appImageView.layer.borderWidth = 0.5
         self.appImageView.layer.borderColor = UIColor.lightGray.cgColor
         self.appImageView.clipsToBounds = true
+        
+        self.appImageView.image = "𝄞".image().grayScale()
     }
  
     public func bindData (_ model: BankAppModel , rank:Int ){
-        self.titleLabel?.text = model.title
-        self.rankLabel?.text = "\(rank)"
-        
-        guard let imageUrlString = model.images.last?.urlString else {return }
-        self.appImageView.imageFromServerURL(urlString: imageUrlString)
+//        self.titleLabel?.text = model.title
+//        self.rankLabel?.text = "\(rank)"
+//        
+//        guard let imageUrlString = model.images.last?.urlString else {return }
+//        self.appImageView.imageFromServerURL(urlString: imageUrlString)
         
     }
 

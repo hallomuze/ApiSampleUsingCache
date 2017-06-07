@@ -16,6 +16,7 @@ class FinanceTableViewController: UITableViewController {
      
     let rankCellIdentifier = "RankCell"
     
+    var cache:NSCache<AnyObject, AnyObject>!
     
     override func viewWillAppear(_ animated: Bool) {
         // navigationItem.title = "금융 카테고리 무료 앱 순위"
@@ -25,7 +26,8 @@ class FinanceTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         appModels = []
-         
+        self.cache = NSCache()
+
         let resultClosure : jsonResultType = {
             
             guard let data = $1 else {
@@ -87,7 +89,52 @@ class FinanceTableViewController: UITableViewController {
         
         let model = self.appModels[indexPath.row]
         
-        cell.bindData(model, rank: indexPath.row)
+        cell.titleLabel?.text = model.title
+        cell.rankLabel?.text = "\(indexPath.row)"
+        
+        guard let urlString = model.images.last?.urlString else { return cell }
+        guard let imgUrl = URL(string: urlString) else {return cell }
+        
+        
+        //image caching ----------
+        
+        let rowNumKey = (indexPath as NSIndexPath).row as AnyObject  //to makes int "conform" AnyObject
+        
+        if (self.cache.object(forKey: (indexPath as NSIndexPath).row as AnyObject) != nil){
+            
+             print("rowNmKey:[\(rowNumKey)]- 이미 이미지 캐시되었음")
+             cell.appImageView?.image = self.cache.object(forKey:  rowNumKey ) as? UIImage
+            
+        }else
+        {
+            URLSession.shared.dataTask(with: imgUrl as URL, completionHandler: {  (data, response, error) -> Void in
+                
+                if error != nil {
+                    print("error is \(error)")
+                    return
+                }
+                
+                if let data = try? Data(contentsOf: imgUrl )   {
+                
+                    DispatchQueue.main.async{ [unowned self] in
+                        
+                        if let updateCell = tableView.cellForRow(at: indexPath)  as? RankCell {
+                            let img:UIImage! = UIImage(data: data)
+                            updateCell.appImageView?.image = img
+                            self.cache.setObject(img, forKey:  rowNumKey )
+                        }
+                    }
+                }
+                
+            }).resume()
+
+        
+        }
+        //guard let imageUrlString = model.images.last?.urlString else {return }
+        //self.appImageView.imageFromServerURL(urlString: imageUrlString)
+        
+        
+        
         
         return cell
         
@@ -101,7 +148,6 @@ class FinanceTableViewController: UITableViewController {
         
         detailVC.identifier = model.identifier
         
-       // self.navigationItem.title = "앱 순위"
         self.navigationController!.pushViewController(detailVC, animated: true)
    
     }

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MoneyRank/RankCell.swift"
-            timestampString = "518329060.063427"
+            timestampString = "518512564.263757"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "bindData(_:rank:)"
             landmarkType = "7">
          </BreakpointContent>
