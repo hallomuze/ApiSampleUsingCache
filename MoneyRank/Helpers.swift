@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Storage{
+class Storage{  //이미지 캐시용
     
     let makeBox: UIView = {
         let view = UIView()
@@ -30,8 +30,7 @@ class Storage{
 extension URL{
     
     typealias imageCompletion = (UIImage) -> Void
-
-    
+ 
     var cachedImage:UIImage?{
         
         let cacheKey = self.absoluteString as AnyObject
@@ -39,7 +38,6 @@ extension URL{
     }
     
     func fetchImage(completion: @escaping imageCompletion){
-        
         
         let task = URLSession.shared.dataTask(with: self) { (data, response, error) in
             
@@ -64,39 +62,12 @@ extension URL{
         
         task.resume()
         
-//        
-//            URLSession.sharedSession().dataTaskWithURL(self) {
-//            data, response, error in
-//            if error == nil {
-//            
-//            }
-//        }
-//        task.resume()
     }
     
 }
-// 너무 잘 동작하는데.
-// https://stackoverflow.com/questions/37018916/swift-async-load-image
 
-extension UIImageView {
-    public func imageFromServerURL(urlString: String) {
-        
-        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { [unowned self] (data, response, error) -> Void in
-            
-            if error != nil {
-                print("error is \(error)")
-                return
-            }
-            
-            DispatchQueue.main.async(execute: {
-                
-                let image = UIImage(data: data!)
-                self.image = image
-            })
-            
-        }).resume()
-    }
-}
+
+//string to image 확장
 extension String {
     
     func image() -> UIImage {
@@ -114,16 +85,15 @@ extension String {
     
 }
 
+//gray filter 구현
 extension UIImage{
     
     func grayScale() -> UIImage {
         
-        let filter = CIFilter(name: "CIPhotoEffectMono")  //
+        let filter = CIFilter(name: "CIPhotoEffectMono")
         
         let ciSource = CIImage(image: self)
         filter?.setValue(ciSource, forKey: "inputImage")
-        
-        // get output CIImage, render as CGImage first to retain proper UIImage scale
         
         let ciOutput = filter?.outputImage
         let ciContext = CIContext()

@@ -73,6 +73,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="appImageView" destination="40t-zL-fKX" id="e4b-R7-298"/>
+                                    <outlet property="categoryLabel" destination="cDZ-oy-xcm" id="c2r-kN-iEk"/>
                                     <outlet property="rankLabel" destination="Qh4-bO-LJz" id="lFQ-k3-IBf"/>
                                     <outlet property="titleLabel" destination="CId-yJ-vce" id="3nz-mO-s7Z"/>
                                 </connections>

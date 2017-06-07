@@ -15,7 +15,7 @@ struct BankAppModel{
     public var images  : [imageModel]
     public var summary : String
     public var title : String
-    public var category : Category?
+    public var category : String?
     
     public var identifier:String
  
@@ -34,6 +34,7 @@ extension BankAppModel{
         guard let nameJson = json["im:name"] as? [String:Any]  ,
             let summaryJson = json["summary"] as? [String:Any]  ,
             let titleJson = json["title"] as? [String:Any],
+            let categoryJson = json["category"] as? [String:Any],
             let imageArrayJson = json["im:image"] as? [Any],
         let idJson  = json["id"] as? [String:Any]
         
@@ -46,9 +47,12 @@ extension BankAppModel{
         guard let nameLabel = nameJson[kLabel] as? String ,
             let summaryLabel = summaryJson[kLabel] as? String ,
             let titleLabel = titleJson[kLabel] as? String,
-        
+            let categoryAttr = categoryJson["attributes"] as? jsonDic,
+            
+            
         let idAttributes = idJson["attributes"] as? jsonDic,
-        let identifier = idAttributes["im:id"]as? String
+        let identifier = idAttributes["im:id"]as? String,
+        let categoryName = categoryAttr[kLabel]as? String
             
             else{
                 return nil
@@ -76,6 +80,7 @@ extension BankAppModel{
         self.title = titleLabel
         self.images = imageCollector
         self.identifier = identifier
+        self.category = categoryName
         
     }
 }

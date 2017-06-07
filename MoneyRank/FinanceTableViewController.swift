@@ -16,13 +16,10 @@ class FinanceTableViewController: UITableViewController {
      
     let rankCellIdentifier = "RankCell"
     
-    var cache:NSCache<AnyObject, AnyObject>!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         appModels = []
-        self.cache = NSCache()
-
+    
         let resultClosure : jsonResultType = {
             
             guard let data = $1 else {
@@ -87,19 +84,20 @@ class FinanceTableViewController: UITableViewController {
         cell.titleLabel?.text = model.title
         cell.rankLabel?.text = "\(indexPath.row)"
         
+        if let cate =  model.category {
+            cell.categoryLabel?.text = cate
+        }
+        
         guard let urlString = model.images.last?.urlString else { return cell }
         guard let imgUrl = URL(string: urlString) else {return cell }
         
         
         //image caching ----------
-
-        let rowNumKey = indexPath.row as AnyObject  //to makes int "conform" AnyObject
         
         if let image = imgUrl.cachedImage{
             
             cell.appImageView.image = image
-         
-            print("rowNmKey:[\(rowNumKey)]- 이미 이미지 캐시되었음 - \(model.title)")
+          
             
         }else{
             
@@ -108,7 +106,7 @@ class FinanceTableViewController: UITableViewController {
                 guard let visibleCell = self.tableView.cellForRow(at: indexPath) as? RankCell else{
                     return
                 }
-            print("rowNmKey:[\(rowNumKey)]- 재로딩.🌨 - \(model.title)")
+                
                 visibleCell.appImageView.image = image
                 
             })
@@ -151,34 +149,6 @@ class FinanceTableViewController: UITableViewController {
  
 }
 
-/*
- 
- 해야할 일
- 
- 애니메이션 디버깅( 시간남으면 )
-  
- 
- 
- 애플에서 JSON 처리법
- 
- https://developer.apple.com/swift/blog/?id=37
- 
- 
- How to use IBInspectable to adjust values in Interface Builder
- https://www.hackingwithswift.com/example-code/uikit/how-to-use-ibinspectable-to-adjust-values-in-interface-builder
- 
- 디버깅팁:
- http://ryanipete.com/blog/ios/swift/objective-c/uidebugginginformationoverlay/
- 
- imageView 에 블러처리
- https://stackoverflow.com/questions/5084845/how-to-set-the-opacity-alpha-of-a-uiimage
- 
- 
- 비동기 로딩:
- 
- http://blog.saltfactory.net/async-upload-url-image-using-gcd/
- 
- 
-  */
+
  
  

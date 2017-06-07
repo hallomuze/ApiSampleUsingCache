@@ -14,6 +14,7 @@
 		12A17A251EE63DFC00D92C3E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A17A241EE63DFC00D92C3E /* Helpers.swift */; };
 		12A17A271EE64BF600D92C3E /* AppImageCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A17A261EE64BF600D92C3E /* AppImageCollectionVC.swift */; };
 		12A17A291EE64D8000D92C3E /* ImagesCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A17A281EE64D8000D92C3E /* ImagesCollectionCell.swift */; };
+		12B053111EE8450B00EA2973 /* sharedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12B053101EE8450B00EA2973 /* sharedConstants.swift */; };
 		12D7A48E1EE19EFC0089C7FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D7A48D1EE19EFC0089C7FC /* AppDelegate.swift */; };
 		12D7A4931EE19EFC0089C7FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D7A4911EE19EFC0089C7FC /* Main.storyboard */; };
 		12D7A4951EE19EFC0089C7FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12D7A4941EE19EFC0089C7FC /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		12A17A241EE63DFC00D92C3E /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		12A17A261EE64BF600D92C3E /* AppImageCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppImageCollectionVC.swift; sourceTree = "<group>"; };
 		12A17A281EE64D8000D92C3E /* ImagesCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCollectionCell.swift; sourceTree = "<group>"; };
+		12B053101EE8450B00EA2973 /* sharedConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sharedConstants.swift; sourceTree = "<group>"; };
 		12D7A48A1EE19EFC0089C7FC /* MoneyRank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyRank.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12D7A48D1EE19EFC0089C7FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12D7A4921EE19EFC0089C7FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				126C5D331EE446CA009E11AC /* BankAppModel.swift */,
 				12A17A221EE6104400D92C3E /* AppDetailModel.swift */,
+				12B053101EE8450B00EA2973 /* sharedConstants.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				12A17A291EE64D8000D92C3E /* ImagesCollectionCell.swift in Sources */,
 				12A17A231EE6104400D92C3E /* AppDetailModel.swift in Sources */,
 				12A17A1B1EE582D800D92C3E /* AppInfoVC.swift in Sources */,
+				12B053111EE8450B00EA2973 /* sharedConstants.swift in Sources */,
 				126C5D341EE446CA009E11AC /* BankAppModel.swift in Sources */,
 				12A17A271EE64BF600D92C3E /* AppImageCollectionVC.swift in Sources */,
 				12D7A4A01EE1B9F80089C7FC /* RankCell.swift in Sources */,

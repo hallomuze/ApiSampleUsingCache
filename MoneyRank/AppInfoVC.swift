@@ -251,8 +251,8 @@ class AppInfoVC: UIViewController {
             
             if let cachedImage = self.cache.object(forKey: objKey) as? UIImage
             {
-                print("cache 이미지 있었음.")
-                //returnImage = cachedImage
+                //print("cache 이미지 있었음.")
+                 
                 completionHandler(cachedImage)
             }
             

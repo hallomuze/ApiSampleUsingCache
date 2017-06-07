@@ -43,35 +43,24 @@ class AppImageCollectionVC: UICollectionViewController {
  
             guard let imgUrl = URL(string: imageLocation) else {return cell }
             
-            
             //image caching ----------
-            
-            let rowNumKey = indexPath.row as AnyObject  //to makes int "conform" AnyObject
             
             if let image = imgUrl.cachedImage{
                 
                 cell.appImageView.image = image
                 
-                print("rowNmKey:[\(rowNumKey)]- 이미 이미지 캐시되었음 ")
                 
             }else{
                 
                 imgUrl.fetchImage(completion: { (image) in
                     
-                    guard let visibleCell = self.collectionView?.cellForItem(at: indexPath) as? ImagesCollectionCell else {
-                        return
+                    if let visibleCell = self.collectionView?.cellForItem(at: indexPath) as? ImagesCollectionCell   {
+                  
+                        visibleCell.appImageView.image = image
                     }
-                    
-                    print("rowNmKey:[\(rowNumKey)]- 재로딩.🌨 ")
-                    visibleCell.appImageView.image = image
                     
                 })
             }
-
-            
-            
-            //cell.appImageView.imageFromServerURL(urlString: imageLocation)
-            
         }
         
         return cell
