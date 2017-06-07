@@ -13,33 +13,30 @@ class AppInfoVC: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var makerLabel: UILabel!
+    @IBOutlet weak var thumbImageView: UIImageView!
     @IBOutlet weak var contentRatingLabel: UILabel!
     @IBOutlet weak var starContainerView: UIView!
     
+    //screenshots
+    @IBOutlet weak var swipableContainerView: UIView!
     @IBOutlet weak var imageContainerHeightConstraint: NSLayoutConstraint!
     
-    @IBOutlet weak var thumbImageView: UIImageView!
+    //Description
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var descMoreButton: UIButton!
-    
     
     //what's new
     @IBOutlet weak var whatsNewDate: UILabel!
     @IBOutlet weak var whatsNewLabel: UILabel!
     
-    @IBOutlet weak var swipableContainerView: UIView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var descLabelHeightConstraint: NSLayoutConstraint!
     
     //information
     @IBOutlet weak var developerLabel: UILabel!
-    
     @IBOutlet weak var categoryLabel: UILabel!
-    
-    
     @IBOutlet weak var updatedLastLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
-    
     @IBOutlet weak var sizeOfAppLabel: UILabel!
     @IBOutlet weak var langLabel: UILabel!
     
@@ -65,8 +62,7 @@ class AppInfoVC: UIViewController {
         swipableContainerView.translatesAutoresizingMaskIntoConstraints = false
         imageContainerHeightConstraint.constant = (kScreenWidth-60) / 2 * kPhoneRatio
         
-        print("width=\((kScreenWidth-60) / 2)  -- kPhoneRatio is\(kPhoneRatio) --> result\((kScreenWidth-60) / 2 * kPhoneRatio)")
-//        imageContainerHeightConstraint.constant = 50
+ //       print("width=\((kScreenWidth-60) / 2)  -- kPhoneRatio is\(kPhoneRatio) --> result\((kScreenWidth-60) / 2 * kPhoneRatio)")
         
         self.prettify()
         
@@ -86,16 +82,15 @@ class AppInfoVC: UIViewController {
                         if let topmost = json["results"] as? [Any] ,let topArr =  topmost.first as? jsonDic {
                             
                             do{
-                             
                                 let appModel =  try AppDetailModel(json: topArr)
                                 self.updateUI(appModel)
                             
                             }catch{
                             
-                                print("exception :\(error)")
+                                print("JSONSerialization exception :\(error)")
                             }
                         }
-                }
+                    }
 
                 }catch{
                     
