@@ -92,42 +92,66 @@ class FinanceTableViewController: UITableViewController {
         
         
         //image caching ----------
+
+        let rowNumKey = indexPath.row as AnyObject  //to makes int "conform" AnyObject
         
-        let idxPathKey = indexPath.row as AnyObject //캐시키로 사용.
-        
-        if self.cache.object(forKey: idxPathKey ) != nil {
+        if let image = imgUrl.cachedImage{
             
-            let cachedImage = self.cache.object(forKey: idxPathKey)
-            
-            cell.appImageView.image = cachedImage as? UIImage
+            cell.appImageView.image = image
+         
+            print("rowNmKey:[\(rowNumKey)]- 이미 이미지 캐시되었음 - \(model.title)")
             
         }else{
             
-            URLSession.shared.downloadTask(with: imgUrl, completionHandler: { (url, response , error ) in
-                if (error != nil) {
-                     return
-                }
+            imgUrl.fetchImage(completion: { (image) in
                 
-                guard let data = try? Data(contentsOf: imgUrl) else {
+                guard let visibleCell = self.tableView.cellForRow(at: indexPath) as? RankCell else{
                     return
                 }
+            print("rowNmKey:[\(rowNumKey)]- 재로딩.🌨 - \(model.title)")
+                visibleCell.appImageView.image = image
                 
-                DispatchQueue.main.async{ [unowned self] in
-                    
-                    guard let visibleCell = self.tableView.cellForRow(at: indexPath) as? RankCell else {
-                        return
-                    }
-                    
-                    if let imageFound = UIImage(data:data) {
-                        
-                        visibleCell.appImageView.image = imageFound
-                        self.cache.setObject(imageFound , forKey:idxPathKey )
-                    }
-                }
-                
-            }).resume()
-            
+            })
         }
+        
+        
+        
+//        
+//        let idxPathKey = indexPath.row as AnyObject //캐시키로 사용.
+//        
+//        if self.cache.object(forKey: idxPathKey ) != nil {
+//            
+//            let cachedImage = self.cache.object(forKey: idxPathKey)
+//            
+//            cell.appImageView.image = cachedImage as? UIImage
+//            
+//        }else{
+//            
+//            URLSession.shared.downloadTask(with: imgUrl, completionHandler: { (url, response , error ) in
+//                if (error != nil) {
+//                     return
+//                }
+//                
+//                guard let data = try? Data(contentsOf: imgUrl) else {
+//                    return
+//                }
+//                
+//                DispatchQueue.main.async{ [unowned self] in
+//                    
+//                    guard let visibleCell = self.tableView.cellForRow(at: indexPath) as? RankCell else {
+//                        return
+//                    }
+//                    
+//                    if let imageFound = UIImage(data:data) {
+//                        
+//                        visibleCell.appImageView.image = imageFound
+//                        self.cache.setObject(imageFound , forKey:idxPathKey )
+//                    }
+//                }
+//                
+//            }).resume()
+//            
+//        }
         
             
 //            

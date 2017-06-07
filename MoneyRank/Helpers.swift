@@ -8,11 +8,76 @@
 
 import UIKit
 
-  
+class Storage{
+    
+    let makeBox: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    let dataCache = NSCache<AnyObject, AnyObject>()
+    
+    static let shared = Storage()
+    
+    private init(){
+        
+        dataCache.name = "image cache"
+        dataCache.countLimit = 20
+        dataCache.totalCostLimit = 10*1024*1024  //10MB
+    }
+}
+
+extension URL{
+    
+    typealias imageCompletion = (UIImage) -> Void
+
+    
+    var cachedImage:UIImage?{
+        
+        let cacheKey = self.absoluteString as AnyObject
+        return Storage.shared.dataCache.object(forKey: cacheKey ) as? UIImage
+    }
+    
+    func fetchImage(completion: @escaping imageCompletion){
+        
+        
+        let task = URLSession.shared.dataTask(with: self) { (data, response, error) in
+            
+            if error == nil {
+     
+                if let  data = data,
+                    let image = UIImage(data: data) {
+
+                    let cacheKey = self.absoluteString as AnyObject
+                
+                    Storage.shared.dataCache.setObject(image, forKey: cacheKey , cost: data.count )
+                    
+                    DispatchQueue.main.async{
+                        
+                        let image = UIImage(data: data)
+                        completion(image!)
+                    }
+                }
+                
+            }
+        }
+        
+        task.resume()
+        
+//        
+//            URLSession.sharedSession().dataTaskWithURL(self) {
+//            data, response, error in
+//            if error == nil {
+//            
+//            }
+//        }
+//        task.resume()
+    }
+    
+}
 // 너무 잘 동작하는데.
 // https://stackoverflow.com/questions/37018916/swift-async-load-image
 
- 
 extension UIImageView {
     public func imageFromServerURL(urlString: String) {
         

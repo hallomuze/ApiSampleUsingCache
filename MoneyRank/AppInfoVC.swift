@@ -8,6 +8,11 @@
 
 import UIKit
 
+let kScreenSize = UIScreen.main.bounds
+let kScreenWidth = UIScreen.main.bounds.width
+let kScreenHeight = UIScreen.main.bounds.height
+let kPhoneRatio = UIScreen.main.bounds.height / UIScreen.main.bounds.width
+
 class AppInfoVC: UIViewController {
 
     
@@ -42,12 +47,6 @@ class AppInfoVC: UIViewController {
     
     var identifier:String?
     var jsonResult:jsonResultType?
-    
-    let kScreenSize = UIScreen.main.bounds
-    let kScreenWidth = UIScreen.main.bounds.width
-    let kScreenHeight = UIScreen.main.bounds.height
-    let kPhoneRatio = UIScreen.main.bounds.height / UIScreen.main.bounds.width
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

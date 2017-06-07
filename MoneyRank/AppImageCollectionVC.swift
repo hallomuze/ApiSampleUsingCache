@@ -57,7 +57,8 @@ class AppImageCollectionVC: UICollectionViewController {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        return CGSize(width:self.view.bounds.width / 2  , height:300)
+        let height = (kScreenWidth-60) / 2 * kPhoneRatio
+        return CGSize(width:self.view.bounds.width / 2  , height:height - 10)
         
     }
     
