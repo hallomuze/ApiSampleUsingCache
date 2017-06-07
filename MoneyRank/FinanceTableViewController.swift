@@ -98,42 +98,71 @@ class FinanceTableViewController: UITableViewController {
         
         //image caching ----------
         
-        let rowNumKey = (indexPath as NSIndexPath).row as AnyObject  //to makes int "conform" AnyObject
-        
-        if (self.cache.object(forKey: (indexPath as NSIndexPath).row as AnyObject) != nil){
+        //indexPath  구하고,
+        let cacheObjKey = indexPath.row as AnyObject
+        if self.cache.object(forKey: cacheObjKey ) != nil {
             
-             print("rowNmKey:[\(rowNumKey)]- 이미 이미지 캐시되었음")
-             cell.appImageView?.image = self.cache.object(forKey:  rowNumKey ) as? UIImage
+            let cachedImage = self.cache.object(forKey: cacheObjKey)
             
-        }else
-        {
-            URLSession.shared.dataTask(with: imgUrl as URL, completionHandler: {  (data, response, error) -> Void in
+            cell.appImageView.image = cachedImage as? UIImage
+            
+        }else{
+            
+            URLSession.shared.dataTask(with: imgUrl, completionHandler: { (data, response, error) in
                 
-                if error != nil {
-                    print("error is \(error)")
-                    return
+                if (error != nil) {
+                     return
                 }
                 
-                if let data = try? Data(contentsOf: imgUrl )   {
-                
-                    DispatchQueue.main.async{ [unowned self] in
+                if let imgData = data ,let image = UIImage(data: imgData ) {
+                    
+                    DispatchQueue.main.async { [unowned self] in
                         
-                        if let updateCell = tableView.cellForRow(at: indexPath)  as? RankCell {
-                            let img:UIImage! = UIImage(data: data)
-                            updateCell.appImageView?.image = img
-                            self.cache.setObject(img, forKey:  rowNumKey )
+                        guard let cell = self.tableView.cellForRow(at: indexPath) as? RankCell else { //should be here
+                            return
                         }
+                        cell.appImageView.image = image
+                        self.cache.setObject(image, forKey: cacheObjKey)
                     }
                 }
                 
             }).resume()
-
+        } 
         
-        }
+//        let rowNumKey = indexPath.row as AnyObject  //to makes int "conform" AnyObject
+//        
+//        if (self.cache.object(forKey: (indexPath as NSIndexPath).row as AnyObject) != nil){
+//            
+//             print("rowNmKey:[\(rowNumKey)]- 이미 이미지 캐시되었음")
+//             cell.appImageView?.image = self.cache.object(forKey:  rowNumKey ) as? UIImage
+//            
+//        }else
+//        {
+//            URLSession.shared.dataTask(with: imgUrl as URL, completionHandler: {  (data, response, error) -> Void in
+//                
+//                if error != nil {
+//                    print("error is \(error)")
+//                    return
+//                }
+//                
+//                if let data = try? Data(contentsOf: imgUrl )   {
+//                
+//                    DispatchQueue.main.async{ [unowned self] in
+//                        
+//                        if let updateCell = tableView.cellForRow(at: indexPath)  as? RankCell {
+//                            let img:UIImage! = UIImage(data: data)
+//                            updateCell.appImageView?.image = img
+//                            self.cache.setObject(img, forKey:  rowNumKey )
+//                        }
+//                    }
+//                }
+//                
+//            }).resume()
+//
+//        
+//        }
         //guard let imageUrlString = model.images.last?.urlString else {return }
         //self.appImageView.imageFromServerURL(urlString: imageUrlString)
-        
-        
         
         
         return cell
