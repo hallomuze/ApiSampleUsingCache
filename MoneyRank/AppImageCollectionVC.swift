@@ -13,7 +13,6 @@ private let reuseIdentifier = "Cell"
 class AppImageCollectionVC: UICollectionViewController {
 
     var imageURLs:[String]?
-    let cache = NSCache<AnyObject, AnyObject>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +40,36 @@ class AppImageCollectionVC: UICollectionViewController {
         
         if let images = self.imageURLs {
             let imageLocation = images[indexPath.row]
+ 
+            guard let imgUrl = URL(string: imageLocation) else {return cell }
             
-            self.findCachedImage(imgUrlString: imageLocation, completionHandler: { (image) in
+            
+            //image caching ----------
+            
+            let rowNumKey = indexPath.row as AnyObject  //to makes int "conform" AnyObject
+            
+            if let image = imgUrl.cachedImage{
+                
                 cell.appImageView.image = image
-            })
+                
+                print("rowNmKey:[\(rowNumKey)]- 이미 이미지 캐시되었음 ")
+                
+            }else{
+                
+                imgUrl.fetchImage(completion: { (image) in
+                    
+                    guard let visibleCell = self.collectionView?.cellForItem(at: indexPath) as? ImagesCollectionCell else {
+                        return
+                    }
+                    
+                    print("rowNmKey:[\(rowNumKey)]- 재로딩.🌨 ")
+                    visibleCell.appImageView.image = image
+                    
+                })
+            }
+
+            
+            
             //cell.appImageView.imageFromServerURL(urlString: imageLocation)
             
         }
@@ -61,46 +86,4 @@ class AppImageCollectionVC: UICollectionViewController {
         return CGSize(width:self.view.bounds.width / 2  , height:height - 10)
         
     }
-    
-    func findCachedImage(imgUrlString: String , completionHandler: @escaping (UIImage?) -> Void)      {
-        
-        guard let imgUrl = URL(string: imgUrlString) else {return   }
-        
-        let objKey = imgUrl as AnyObject
-        
-        if self.cache.object(forKey: objKey ) != nil {
-            
-            if let cachedImage = self.cache.object(forKey: objKey) as? UIImage
-            {
-                print("cache 이미지 있었음.")
-                
-                completionHandler(cachedImage)
-            }
-            
-        }else{
-            
-            URLSession.shared.downloadTask(with: imgUrl, completionHandler: { (url, response, error ) in
-                if (error != nil) {
-                    return
-                }
-                
-                guard let data = try? Data(contentsOf: imgUrl) else {
-                    return
-                }
-                
-                DispatchQueue.main.async{ [unowned self] in
-                    
-                    if let imageFound = UIImage(data:data) {
-                        
-                        completionHandler(imageFound)
-                        self.cache.setObject(imageFound , forKey:objKey )
-                    }
-                }
-                
-            }) .resume()
-            
-        }
-    }
- 
-
 }

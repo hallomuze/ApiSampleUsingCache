@@ -45,8 +45,14 @@ class AppInfoVC: UIViewController {
     @IBOutlet weak var sizeOfAppLabel: UILabel!
     @IBOutlet weak var langLabel: UILabel!
     
+    //bottom info
+    @IBOutlet weak var sellerSiteLabel: UILabel!
+    
+    @IBOutlet weak var copyrightLabel: UILabel!
+    
     var identifier:String?
     var jsonResult:jsonResultType?
+    var model:AppDetailModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,9 +66,7 @@ class AppInfoVC: UIViewController {
 
         swipableContainerView.translatesAutoresizingMaskIntoConstraints = false
         imageContainerHeightConstraint.constant = (kScreenWidth-60) / 2 * kPhoneRatio
-        
- //       print("width=\((kScreenWidth-60) / 2)  -- kPhoneRatio is\(kPhoneRatio) --> result\((kScreenWidth-60) / 2 * kPhoneRatio)")
-        
+         
         self.prettify()
         
         let url : String  = "https://itunes.apple.com/lookup?id=\(id)&country=kr"
@@ -82,6 +86,7 @@ class AppInfoVC: UIViewController {
                             
                             do{
                                 let appModel =  try AppDetailModel(json: topArr)
+                                self.model = appModel
                                 self.updateUI(appModel)
                             
                             }catch{
@@ -124,7 +129,12 @@ class AppInfoVC: UIViewController {
                 self.developerLabel.text = model.artistName
                 self.categoryLabel.text = model.primaryGenreName
                 self.updatedLastLabel.text = model.currentVersionReleaseDate
+                self.versionLabel.text = model.version
                 
+                if let langcode =  model.languageCodesISO2A  {
+                    let firstLang = langcode.first
+                    self.langLabel.text = firstLang
+                }
                 if let fileSizeAsInt = Int64(model.fileSizeBytes) {
                    
                     let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount:fileSizeAsInt, countStyle: .file)
@@ -135,6 +145,10 @@ class AppInfoVC: UIViewController {
                          self.fillStarContainer(rating: starVal)
                 }
             
+                
+                
+                //self.copyrightLabel.text = model.sellerName
+                
                 for vc in self.childViewControllers{
                  
                     if vc is AppImageCollectionVC {
@@ -268,4 +282,18 @@ class AppInfoVC: UIViewController {
         }
     }
 
+    @IBAction func goWebsite(_ sender: UIControl) {
+        
+        if let sellerUrlStr = self.model?.sellerUrl {
+            
+            if let newUrl = URL(string: sellerUrlStr ){
+                
+                UIApplication.shared.openURL(newUrl)
+                               
+            }
+        }
+        
+    }
+    @IBOutlet weak var websiteMovingControl: UIControl!
+  
 }

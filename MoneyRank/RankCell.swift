@@ -25,14 +25,6 @@ class RankCell: UITableViewCell {
         
         self.appImageView.image = "🔍".image().grayScale()
     }
- 
-    public func bindData (_ model: BankAppModel , rank:Int ){
-//        self.titleLabel?.text = model.title
-//        self.rankLabel?.text = "\(rank)"
-//        
-//        guard let imageUrlString = model.images.last?.urlString else {return }
-//        self.appImageView.imageFromServerURL(urlString: imageUrlString)
-        
-    }
+  
 
 }

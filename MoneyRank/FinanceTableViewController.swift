@@ -115,104 +115,6 @@ class FinanceTableViewController: UITableViewController {
         }
         
         
-        
-//        
-//        let idxPathKey = indexPath.row as AnyObject //캐시키로 사용.
-//        
-//        if self.cache.object(forKey: idxPathKey ) != nil {
-//            
-//            let cachedImage = self.cache.object(forKey: idxPathKey)
-//            
-//            cell.appImageView.image = cachedImage as? UIImage
-//            
-//        }else{
-//            
-//            URLSession.shared.downloadTask(with: imgUrl, completionHandler: { (url, response , error ) in
-//                if (error != nil) {
-//                     return
-//                }
-//                
-//                guard let data = try? Data(contentsOf: imgUrl) else {
-//                    return
-//                }
-//                
-//                DispatchQueue.main.async{ [unowned self] in
-//                    
-//                    guard let visibleCell = self.tableView.cellForRow(at: indexPath) as? RankCell else {
-//                        return
-//                    }
-//                    
-//                    if let imageFound = UIImage(data:data) {
-//                        
-//                        visibleCell.appImageView.image = imageFound
-//                        self.cache.setObject(imageFound , forKey:idxPathKey )
-//                    }
-//                }
-//                
-//            }).resume()
-//            
-//        }
-        
-            
-//            
-//            
-//            URLSession.shared.dataTask(with: imgUrl, completionHandler: { (data, response, error) in
-//                
-//                if (error != nil) {
-//                     return
-//                }
-//                
-//                if let imgData = data ,let image = UIImage(data: imgData ) {
-//                    
-//                    DispatchQueue.main.async { [unowned self] in
-//                        
-//                        guard let cell = self.tableView.cellForRow(at: indexPath) as? RankCell else { //should be here
-//                            return
-//                        }
-//                        cell.appImageView.image = image
-//                        self.cache.setObject(image, forKey: cacheObjKey)
-//                    }
-//                }
-//                
-//            }).resume()
-//        }
-        
-//        let rowNumKey = indexPath.row as AnyObject  //to makes int "conform" AnyObject
-//        
-//        if (self.cache.object(forKey: (indexPath as NSIndexPath).row as AnyObject) != nil){
-//            
-//             print("rowNmKey:[\(rowNumKey)]- 이미 이미지 캐시되었음")
-//             cell.appImageView?.image = self.cache.object(forKey:  rowNumKey ) as? UIImage
-//            
-//        }else
-//        {
-//            URLSession.shared.dataTask(with: imgUrl as URL, completionHandler: {  (data, response, error) -> Void in
-//                
-//                if error != nil {
-//                    print("error is \(error)")
-//                    return
-//                }
-//                
-//                if let data = try? Data(contentsOf: imgUrl )   {
-//                
-//                    DispatchQueue.main.async{ [unowned self] in
-//                        
-//                        if let updateCell = tableView.cellForRow(at: indexPath)  as? RankCell {
-//                            let img:UIImage! = UIImage(data: data)
-//                            updateCell.appImageView?.image = img
-//                            self.cache.setObject(img, forKey:  rowNumKey )
-//                        }
-//                    }
-//                }
-//                
-//            }).resume()
-//
-//        
-//        }
-        //guard let imageUrlString = model.images.last?.urlString else {return }
-        //self.appImageView.imageFromServerURL(urlString: imageUrlString)
-        
-        
         return cell
         
     }
@@ -253,13 +155,8 @@ class FinanceTableViewController: UITableViewController {
  
  해야할 일
  
- 
- SDWeb image  제거하기
- 주석제거하기
- layoutIfneeded필요시 삭제
  애니메이션 디버깅( 시간남으면 )
- stackover 에서 가져온 소스 내걸로 만들기, 보기좋게 수정하기
- 
+  
  
  
  애플에서 JSON 처리법
