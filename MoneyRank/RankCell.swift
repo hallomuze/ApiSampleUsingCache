@@ -28,10 +28,6 @@ class RankCell: UITableViewCell {
         self.titleLabel?.text = model.title
         self.rankLabel?.text = "\(rank)"
         
-        //if use SDWeb
-        //guard let imageUrl = model.images.last?.url else { return }
-        //self.appImageView.sd_setImage(with: imageUrl , completed: nil)
-        
         guard let imageUrlString = model.images.last?.urlString else {return }
         self.appImageView.imageFromServerURL(urlString: imageUrlString)
         

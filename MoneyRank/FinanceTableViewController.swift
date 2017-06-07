@@ -24,72 +24,50 @@ class FinanceTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         appModels = []
          
         let resultClosure : jsonResultType = {
             
-            if let data = $1 {  //data
+            guard let data = $1 else {
+                return
+            }
                 
-                do{
-                    if let apiDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
+            do{
+                if let apiDic = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
+                    
+                    if let feed = apiDic["feed"] as? [String:Any] {
                         
-                        if let feed = apiDic["feed"] as? [String:Any] {
+                        //array 타입의 entry
+                        
+                        if let entrySeed = feed["entry"] as? [Any] {    //배열구해오고.
                             
-                            //title, icon
-                            
-//                            if let title = feed["title"] as? [String:Any] ,
-//                                let   icon = feed["icon"] as? [String:Any] {
-//                                
-//                                let finalTitle = title["label"] as? String
-//                                let finalIcon = icon["label"] as? String
-//                                print("title:\(finalTitle!) , icon:\(finalIcon!)")
-//                            }
-                            
-                            //array 타입의 entry
-                            
-                            if let entrySeed = feed["entry"] as? [Any] {    //배열구해오고.
+                            for item in entrySeed { //12개 중에 하나의 딕셔너리에 해당함. 예) 0번째에 해당.
                                 
-                                for item in entrySeed { //12개 중에 하나의 딕셔너리에 해당함. 예) 0번째에 해당.
-                                    
-                                     if let item = item as? [String:Any]{
-                                    
-                                        if let model = BankAppModel(json: item)  {
-                                        
-                                            self.appModels.append(model)
-                                    
-                                        }
-                                    }
-                                    
-                                }
-                            } //end of parsing Array.
-                            
-                            
-                            if self.appModels.isEmpty == false {
+                                 if let item = item as? [String:Any]{
                                 
-                                DispatchQueue.global(qos: .userInitiated).async{
-                                 
+                                    if let model = BankAppModel(json: item)  {
                                     
-                                    
-                                    DispatchQueue.main.async {
-                                      
-                                        [unowned self] in
-                                        
-                                        self.tableView.reloadData()
+                                        self.appModels.append(model)
                                     }
                                 }
-                                
+                            }
+                        } //end of parsing Array.
+                        
+                        if self.appModels.isEmpty == false {
+                            
+                            DispatchQueue.main.async {   [unowned self] in
+                                self.tableView.reloadData()
                             }
                         }
                     }
-                    
-                    
-                }catch{
-                    
-                    print("errr")
                 }
                 
-            } //end of dollar 1
+                
+            }catch{
+                
+                print("errr")
+            }
+            
         }
         
         
@@ -144,17 +122,6 @@ class FinanceTableViewController: UITableViewController {
     }
  
     
-    func legacy( indexPath: IndexPath){
-        let detailVC = self.storyboard!.instantiateViewController(withIdentifier: "DetailVC_legacy") as! DetailVC_legacy
-        
-        if self.appModels.isEmpty { return  }
-        
-        let model = self.appModels[indexPath.row]
-  
-        detailVC.model = model
-        self.navigationController!.pushViewController(detailVC, animated: true)
- 
-    }
 
  
 }
@@ -192,46 +159,6 @@ class FinanceTableViewController: UITableViewController {
  http://blog.saltfactory.net/async-upload-url-image-using-gcd/
  
  
- 
-self.scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: self.view.frame.size.height))
-self.scrollView.center = self.view.center
-self.scrollView.contentMode = .scaleAspectFit
-
-self.scrollView.delegate = self
-self.scrollView.minimumZoomScale = 0.5
-self.scrollView.maximumZoomScale = 5.0
-self.scrollView.zoomScale = 1.0
-self.scrollView.showsHorizontalScrollIndicator = true
-self.scrollView.showsVerticalScrollIndicator = true
-self.scrollView.alwaysBounceVertical = true
-self.scrollView.alwaysBounceHorizontal = true
-self.scrollView.bounces = true
-self.scrollView.bouncesZoom = true
-self.scrollView.clipsToBounds = true
-self.scrollView.flashScrollIndicators()
-self.imageView.image = UIImage(named: "offline")
-self.imageView.center = self.scrollView.center
-
-self.scrollView.contentSize = self.imageView.bounds.size
-self.scrollView.autoresizingMask = [UIViewAutoresizing.flexibleWidth,UIViewAutoresizing.flexibleHeight]
-
-self.scrollView.addSubview(self.imageView)
-self.view.addSubview(self.scrollView)
-
-func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-    return self.imageView
-}
-
-func scrollViewDidZoom(_ scrollView: UIScrollView) {
-    
-    let imageViewSize = self.imageView.frame.size
-    let scrollViewSize = self.scrollView.bounds.size
-    
-    let verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0
-    let horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0
-    
-    self.scrollView.contentInset = UIEdgeInsets(top: verticalPadding, left: horizontalPadding, bottom: verticalPadding, right: horizontalPadding)
-}
-*/
+  */
  
  
