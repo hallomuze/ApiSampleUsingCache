@@ -8,7 +8,6 @@
 
 import UIKit
 
-class PrettyUI: NSObject {
   
 // 너무 잘 동작하는데.
 // https://stackoverflow.com/questions/37018916/swift-async-load-image

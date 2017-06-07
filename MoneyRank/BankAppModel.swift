@@ -40,6 +40,7 @@ struct BankAppModel{
     
     public var identifier:String
  
+    public let cacheForImage = NSCache <AnyObject,AnyObject>()
  
 //    public var im_price : Im_price?
 //    public var im_contentType : Im:contentType?
@@ -107,6 +108,7 @@ extension BankAppModel{
         self.title = titleLabel
         self.images = imageCollector
         self.identifier = identifier
+        
     }
 }
 

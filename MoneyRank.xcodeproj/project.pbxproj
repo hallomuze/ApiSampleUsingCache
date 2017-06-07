@@ -11,7 +11,7 @@
 		12A17A1B1EE582D800D92C3E /* AppInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A17A1A1EE582D800D92C3E /* AppInfoVC.swift */; };
 		12A17A1D1EE58F7700D92C3E /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A17A1C1EE58F7700D92C3E /* APIService.swift */; };
 		12A17A231EE6104400D92C3E /* AppDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A17A221EE6104400D92C3E /* AppDetailModel.swift */; };
-		12A17A251EE63DFC00D92C3E /* PrettyUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A17A241EE63DFC00D92C3E /* PrettyUI.swift */; };
+		12A17A251EE63DFC00D92C3E /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A17A241EE63DFC00D92C3E /* Helpers.swift */; };
 		12A17A271EE64BF600D92C3E /* AppImageCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A17A261EE64BF600D92C3E /* AppImageCollectionVC.swift */; };
 		12A17A291EE64D8000D92C3E /* ImagesCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A17A281EE64D8000D92C3E /* ImagesCollectionCell.swift */; };
 		12D7A48E1EE19EFC0089C7FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D7A48D1EE19EFC0089C7FC /* AppDelegate.swift */; };
@@ -27,7 +27,7 @@
 		12A17A1A1EE582D800D92C3E /* AppInfoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppInfoVC.swift; sourceTree = "<group>"; };
 		12A17A1C1EE58F7700D92C3E /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		12A17A221EE6104400D92C3E /* AppDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDetailModel.swift; sourceTree = "<group>"; };
-		12A17A241EE63DFC00D92C3E /* PrettyUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrettyUI.swift; sourceTree = "<group>"; };
+		12A17A241EE63DFC00D92C3E /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		12A17A261EE64BF600D92C3E /* AppImageCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppImageCollectionVC.swift; sourceTree = "<group>"; };
 		12A17A281EE64D8000D92C3E /* ImagesCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesCollectionCell.swift; sourceTree = "<group>"; };
 		12D7A48A1EE19EFC0089C7FC /* MoneyRank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyRank.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,7 +96,7 @@
 				12A17A211EE60FF600D92C3E /* ViewControllers & Cell */,
 				12A17A201EE60FE900D92C3E /* Model */,
 				12A17A1C1EE58F7700D92C3E /* APIService.swift */,
-				12A17A241EE63DFC00D92C3E /* PrettyUI.swift */,
+				12A17A241EE63DFC00D92C3E /* Helpers.swift */,
 				12D7A4941EE19EFC0089C7FC /* Assets.xcassets */,
 				12D7A4961EE19EFC0089C7FC /* LaunchScreen.storyboard */,
 				12D7A4991EE19EFC0089C7FC /* Info.plist */,
@@ -179,7 +179,7 @@
 			files = (
 				12D7A4A21EE1BAD40089C7FC /* FinanceTableViewController.swift in Sources */,
 				12A17A1D1EE58F7700D92C3E /* APIService.swift in Sources */,
-				12A17A251EE63DFC00D92C3E /* PrettyUI.swift in Sources */,
+				12A17A251EE63DFC00D92C3E /* Helpers.swift in Sources */,
 				12D7A48E1EE19EFC0089C7FC /* AppDelegate.swift in Sources */,
 				12A17A291EE64D8000D92C3E /* ImagesCollectionCell.swift in Sources */,
 				12A17A231EE6104400D92C3E /* AppDetailModel.swift in Sources */,
