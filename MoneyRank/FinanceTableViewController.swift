@@ -82,7 +82,7 @@ class FinanceTableViewController: UITableViewController {
         let model = self.appModels[indexPath.row]
         
         cell.titleLabel?.text = model.title
-        cell.rankLabel?.text = "\(indexPath.row)"
+        cell.rankLabel?.text = "\(indexPath.row+1)"
         
         if let cate =  model.category {
             cell.categoryLabel?.text = cate

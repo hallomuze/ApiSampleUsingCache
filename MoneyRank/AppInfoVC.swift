@@ -243,7 +243,6 @@ class AppInfoVC: UIViewController {
         
         guard let imgUrl = URL(string: imgUrlString) else {return   }
         
-        //var returnImage:UIImage = UIImage()
         
         let objKey = imgUrl as AnyObject
         
@@ -251,8 +250,8 @@ class AppInfoVC: UIViewController {
             
             if let cachedImage = self.cache.object(forKey: objKey) as? UIImage
             {
-                //print("cache 이미지 있었음.")
-                 
+                
+                
                 completionHandler(cachedImage)
             }
             
@@ -271,7 +270,6 @@ class AppInfoVC: UIViewController {
                     
                     if let imageFound = UIImage(data:data) {
                         
-                        //returnImage = imageFound
                         completionHandler(imageFound)
                         self.cache.setObject(imageFound , forKey:objKey )
                     }
