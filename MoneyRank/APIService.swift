@@ -46,6 +46,7 @@ public class APIService: NSObject {
         
     }
     
+    
     //참고 특정query 파싱: https://xho95.github.io/ios/framework/foundation/nsurl/2016/06/02/Parsing-a-NSURL-value.html
     
     // https://grokswift.com/building-urls/

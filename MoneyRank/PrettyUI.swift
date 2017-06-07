@@ -9,8 +9,7 @@
 import UIKit
 
 class PrettyUI: NSObject {
-
-    
+ 
     class func applyAttrLabelAndGetHeight(aString: String , label aLabel:UILabel , lineSpacing aSpacing: CGFloat, width aWidth:CGFloat) -> CGFloat {
         
         // prepare parameters
@@ -51,6 +50,7 @@ class PrettyUI: NSObject {
 // 너무 잘 동작하는데.
 // https://stackoverflow.com/questions/37018916/swift-async-load-image
 
+ 
 extension UIImageView {
     public func imageFromServerURL(urlString: String) {
         
@@ -70,7 +70,6 @@ extension UIImageView {
         }).resume()
     }
 }
-
 extension String {
     
     func image() -> UIImage {

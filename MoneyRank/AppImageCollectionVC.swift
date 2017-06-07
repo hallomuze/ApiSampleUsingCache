@@ -13,6 +13,7 @@ private let reuseIdentifier = "Cell"
 class AppImageCollectionVC: UICollectionViewController {
 
     var imageURLs:[String]?
+    let cache = NSCache<AnyObject, AnyObject>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +41,11 @@ class AppImageCollectionVC: UICollectionViewController {
         
         if let images = self.imageURLs {
             let imageLocation = images[indexPath.row]
-            let url = URL(string: imageLocation )
-            cell.appImageView.sd_setImage(with: url, completed: nil)
+            
+            self.findCachedImage(imgUrlString: imageLocation, completionHandler: { (image) in
+                cell.appImageView.image = image
+            })
+            //cell.appImageView.imageFromServerURL(urlString: imageLocation)
             
         }
         
@@ -55,6 +59,46 @@ class AppImageCollectionVC: UICollectionViewController {
         
         return CGSize(width:self.view.bounds.width / 2  , height:300)
         
+    }
+    
+    func findCachedImage(imgUrlString: String , completionHandler: @escaping (UIImage?) -> Void)      {
+        
+        guard let imgUrl = URL(string: imgUrlString) else {return   }
+        
+        let objKey = imgUrl as AnyObject
+        
+        if self.cache.object(forKey: objKey ) != nil {
+            
+            if let cachedImage = self.cache.object(forKey: objKey) as? UIImage
+            {
+                print("cache 이미지 있었음.")
+                
+                completionHandler(cachedImage)
+            }
+            
+        }else{
+            
+            URLSession.shared.downloadTask(with: imgUrl, completionHandler: { (url, response, error ) in
+                if (error != nil) {
+                    return
+                }
+                
+                guard let data = try? Data(contentsOf: imgUrl) else {
+                    return
+                }
+                
+                DispatchQueue.main.async{ [unowned self] in
+                    
+                    if let imageFound = UIImage(data:data) {
+                        
+                        completionHandler(imageFound)
+                        self.cache.setObject(imageFound , forKey:objKey )
+                    }
+                }
+                
+            }) .resume()
+            
+        }
     }
  
 

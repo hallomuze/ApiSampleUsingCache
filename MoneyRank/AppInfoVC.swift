@@ -110,8 +110,11 @@ class AppInfoVC: UIViewController {
                 
                 self.makerLabel.text = model.artistName
                 
-                let imageUrl = URL(string:model.artworkUrl60)
-                self.thumbImageView.sd_setImage(with: imageUrl , completed: nil)
+                //self.thumbImageView.imageFromServerURL(urlString: model.artworkUrl60 )
+                
+                self.findCachedImage(imgUrlString: model.artworkUrl100, completionHandler: { (imageFound ) in
+                    self.thumbImageView.image = imageFound
+                })
                 
                 // What's new
                 self.descLabel.text = model.description
@@ -219,6 +222,51 @@ class AppInfoVC: UIViewController {
             }
         }
     } //end of fillStar func
-   
+    
+    
+    let cache = NSCache<AnyObject, AnyObject>()
+    
+    func findCachedImage(imgUrlString: String , completionHandler: @escaping (UIImage?) -> Void)      {
+        
+        guard let imgUrl = URL(string: imgUrlString) else {return   }
+        
+        //var returnImage:UIImage = UIImage()
+        
+        let objKey = imgUrl as AnyObject
+        
+        if self.cache.object(forKey: objKey ) != nil {
+            
+            if let cachedImage = self.cache.object(forKey: objKey) as? UIImage
+            {
+                print("cache 이미지 있었음.")
+                //returnImage = cachedImage
+                completionHandler(cachedImage)
+            }
+            
+        }else{
+            
+            URLSession.shared.downloadTask(with: imgUrl, completionHandler: { (url, response, error ) in
+                if (error != nil) {
+                    return
+                }
+                
+                guard let data = try? Data(contentsOf: imgUrl) else {
+                    return
+                }
+                
+                DispatchQueue.main.async{ [unowned self] in
+                    
+                    if let imageFound = UIImage(data:data) {
+                        
+                        //returnImage = imageFound
+                        completionHandler(imageFound)
+                        self.cache.setObject(imageFound , forKey:objKey )
+                    }
+                }
+                
+            }) .resume()
+            
+        }
+    }
 
 }

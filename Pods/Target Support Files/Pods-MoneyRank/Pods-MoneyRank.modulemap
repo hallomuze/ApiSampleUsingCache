@@ -1,6 +1,0 @@
-framework module Pods_MoneyRank {
-  umbrella header "Pods-MoneyRank-umbrella.h"
-
-  export *
-  module * { export * }
-}

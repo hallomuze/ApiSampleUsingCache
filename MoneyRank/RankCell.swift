@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import SDWebImage
+ 
 
 class RankCell: UITableViewCell {
 
@@ -23,7 +23,7 @@ class RankCell: UITableViewCell {
         self.appImageView.layer.borderColor = UIColor.lightGray.cgColor
         self.appImageView.clipsToBounds = true
         
-        self.appImageView.image = "𝄞".image().grayScale()
+        self.appImageView.image = "🔍".image().grayScale()
     }
  
     public func bindData (_ model: BankAppModel , rank:Int ){
