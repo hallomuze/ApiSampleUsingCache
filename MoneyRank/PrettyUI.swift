@@ -74,7 +74,7 @@ extension UIImageView {
 
 extension String {
     func image() -> UIImage {
-        let size = CGSize(width: 15, height: 15)
+        let size = CGSize(width: 30, height: 30)
         UIGraphicsBeginImageContextWithOptions(size, false, 0);
         UIColor.white.set()
         let rect = CGRect(origin: CGPoint.zero, size: size)
@@ -83,6 +83,28 @@ extension String {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image!
+    }
+    
+    
+    
+}
+
+extension UIImage{
+    
+    func grayScale() -> UIImage {
+        
+        let filter = CIFilter(name: "CIPhotoEffectMono")  //
+        
+        let ciInput = CIImage(image: self)
+        filter?.setValue(ciInput, forKey: "inputImage")
+        
+        // get output CIImage, render as CGImage first to retain proper UIImage scale
+        
+        let ciOutput = filter?.outputImage
+        let ciContext = CIContext()
+        let cgImage = ciContext.createCGImage(ciOutput!, from: (ciOutput?.extent)!)
+        
+        return UIImage(cgImage: cgImage!)
     }
     
 }

@@ -14,13 +14,14 @@ class AppInfoVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var makerLabel: UILabel!
     @IBOutlet weak var contentRatingLabel: UILabel!
+    @IBOutlet weak var starContainerView: UIView!
     
-    @IBOutlet weak var starLabel: UILabel!
+    @IBOutlet weak var imageContainerHeightConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var thumbImageView: UIImageView!
     @IBOutlet weak var descLabel: UILabel!
     @IBOutlet weak var descMoreButton: UIButton!
     
-    @IBOutlet weak var descFakeLabel: UILabel!
     
     //what's new
     @IBOutlet weak var whatsNewDate: UILabel!
@@ -45,6 +46,11 @@ class AppInfoVC: UIViewController {
     var identifier:String?
     var jsonResult:jsonResultType?
     
+    let kScreenSize = UIScreen.main.bounds
+    let kScreenWidth = UIScreen.main.bounds.width
+    let kScreenHeight = UIScreen.main.bounds.height
+    let kPhoneRatio = UIScreen.main.bounds.height / UIScreen.main.bounds.width
+    
     override func viewDidLoad() {
         super.viewDidLoad()
  
@@ -55,6 +61,12 @@ class AppInfoVC: UIViewController {
             return
         }
 
+        swipableContainerView.translatesAutoresizingMaskIntoConstraints = false
+        imageContainerHeightConstraint.constant = (kScreenWidth-60) / 2 * kPhoneRatio
+        
+        print("width=\((kScreenWidth-60) / 2)  -- kPhoneRatio is\(kPhoneRatio) --> result\((kScreenWidth-60) / 2 * kPhoneRatio)")
+//        imageContainerHeightConstraint.constant = 50
+        
         self.prettify()
         
         let url : String  = "https://itunes.apple.com/lookup?id=\(id)&country=kr"
@@ -129,38 +141,16 @@ class AppInfoVC: UIViewController {
                 self.sizeOfAppLabel.text = "\(fileSizeWithUnit)"
                 
                 
-                self.view.layoutIfNeeded()
-                self.view.updateConstraintsIfNeeded()
-                //print("url:\(imageUrl)")
-                
-                
-                //                let width = self.makerLabel.bounds.size.width
-                //                let labelHeight = PrettyUI.applyAttrLabelAndGetHeight( aString: model.artistName, label: self.makerLabel, lineSpacing: 3, width: width )
-                //
-                //                self.makerLabel.translatesAutoresizingMaskIntoConstraints = false
-                //                self.descLabelHeightConstraint.constant = labelHeight
+                //self.view.layoutIfNeeded()
+                //self.view.updateConstraintsIfNeeded()
                 
                 
                 
-                self.view.layoutIfNeeded()
-                
+                // self.view.layoutIfNeeded()
+
+           
                 if let starVal = model.averageUserRatingForCurrentVersion {
-                    
-                    self.starLabel.text = "⭐️"
-                    
-                    UIView.animate(withDuration: 0.3,
-                                   delay: 0.0,
-                                   usingSpringWithDamping: 0.3,
-                                   initialSpringVelocity: 10.0,
-                                   options: .curveLinear,
-                                   animations: { () -> Void in
-                                    
-                                    self.starLabel.text = String(repeating: "⭐️", count: starVal)
-                                    
-                    }, completion: nil)
-                    
-                }else{
-                    self.starLabel.text = "🌨"
+                         self.fillStarContainer(rating: starVal)
                 }
                 
 
@@ -190,8 +180,7 @@ class AppInfoVC: UIViewController {
         thumbImageView.layer.cornerRadius = 25
         thumbImageView.layer.borderColor = UIColor.lightGray.cgColor
         thumbImageView.layer.borderWidth = 1
-        
-        
+         
     }
     @IBAction func actionMoreDesc(_ sender: UIButton) {
         
@@ -200,21 +189,64 @@ class AppInfoVC: UIViewController {
         self.descLabel.numberOfLines = 0
         self.view.layoutIfNeeded()
         
-        //self.view.setNeedsUpdateConstraints()
-        //self.view.updateConstraintsIfNeeded()
-        
         self.descMoreButton.isHidden = true
         
-//        UIView.animate(withDuration: 0.2,
-//                       delay: 0.0,
-//                       usingSpringWithDamping: 0.0,
-//                       initialSpringVelocity: 10.0,
-//                       options: .curveLinear,
-//                       animations: { () -> Void in
-//                        
-//                        
-//        }, completion: nil)
+    }
+    
+    func fillStarContainer(rating:Int){
+  
+        //Stack View
+        let stackView   = UIStackView(  )
+        stackView.axis  = UILayoutConstraintAxis.horizontal
+        stackView.distribution  = UIStackViewDistribution.equalSpacing
+        stackView.alignment = UIStackViewAlignment.leading
+        stackView.spacing   = 2.0
         
+        let kImageViewSize:CGFloat = 13.0
+        
+        for _ in 0..<5{
+            
+            let imageView = UIImageView()
+            imageView.backgroundColor = UIColor.blue
+            imageView.heightAnchor.constraint(equalToConstant: kImageViewSize).isActive = true
+            imageView.widthAnchor.constraint(equalToConstant: kImageViewSize).isActive = true
+            imageView.image = "⭐️".image().grayScale()
+            
+            stackView.addArrangedSubview(imageView)
+        }
+        stackView.translatesAutoresizingMaskIntoConstraints = false;
+        self.starContainerView.addSubview(stackView)
+        
+        //Constraints
+        stackView.widthAnchor.constraint(equalToConstant:  15*5 ).isActive = true
+        stackView.heightAnchor.constraint(equalToConstant: 15 ).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: self.starContainerView.centerYAnchor).isActive = true
+        stackView.leftAnchor.constraint(equalTo: self.starContainerView.leftAnchor).isActive = true
+        
+        for (idx,view) in stackView.subviews.enumerated(){
+            if view is UIImageView{
+                let img = view as! UIImageView
+                
+                print("asdfasdf")
+                UIView.animate(withDuration: 1.5,
+                               delay: 2.1,
+                               usingSpringWithDamping: 0.0,
+                               initialSpringVelocity: 1.0,
+                               options: .curveLinear,
+                               animations: { () -> Void in
+                                
+                                if idx <= rating {
+                                    img.image = "⭐️".image()
+                                }
+                                
+                }, completion: nil)
+                
+                
+            }
+        }
+        
+        
+
     }
    
 
