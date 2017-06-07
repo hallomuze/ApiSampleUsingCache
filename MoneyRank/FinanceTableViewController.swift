@@ -27,7 +27,7 @@ class FinanceTableViewController: UITableViewController {
         
         appModels = []
          
-        let resultClosure : apiResult = {
+        let resultClosure : jsonResultType = {
             
             if let data = $1 {  //data
                 
@@ -38,13 +38,13 @@ class FinanceTableViewController: UITableViewController {
                             
                             //title, icon
                             
-                            if let title = feed["title"] as? [String:Any] ,
-                                let   icon = feed["icon"] as? [String:Any] {
-                                
-                                let finalTitle = title["label"] as? String
-                                let finalIcon = icon["label"] as? String
-                                print("title:\(finalTitle!) , icon:\(finalIcon!)")
-                            }
+//                            if let title = feed["title"] as? [String:Any] ,
+//                                let   icon = feed["icon"] as? [String:Any] {
+//                                
+//                                let finalTitle = title["label"] as? String
+//                                let finalIcon = icon["label"] as? String
+//                                print("title:\(finalTitle!) , icon:\(finalIcon!)")
+//                            }
                             
                             //array 타입의 entry
                             
@@ -69,8 +69,12 @@ class FinanceTableViewController: UITableViewController {
                                 
                                 DispatchQueue.global(qos: .userInitiated).async{
                                  
+                                    
+                                    
                                     DispatchQueue.main.async {
-                                
+                                      
+                                        [unowned self] in
+                                        
                                         self.tableView.reloadData()
                                     }
                                 }

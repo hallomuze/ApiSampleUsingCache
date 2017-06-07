@@ -60,11 +60,29 @@ extension UIImageView {
                 print(error)
                 return
             }
-            DispatchQueue.main.async(execute: { () -> Void in
+            
+            
+            DispatchQueue.main.async(execute: { [unowned self] in
+                
                 let image = UIImage(data: data!)
                 self.image = image
             })
             
         }).resume()
     }
+}
+
+extension String {
+    func image() -> UIImage {
+        let size = CGSize(width: 15, height: 15)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0);
+        UIColor.white.set()
+        let rect = CGRect(origin: CGPoint.zero, size: size)
+        UIRectFill(CGRect(origin: CGPoint.zero, size: size))
+        (self as NSString).draw(in: rect, withAttributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 30)])
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+    
 }

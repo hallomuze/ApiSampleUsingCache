@@ -41,31 +41,75 @@ class AppInfoVC: UIViewController {
     
     @IBOutlet weak var sizeOfAppLabel: UILabel!
     @IBOutlet weak var langLabel: UILabel!
-    var identifier:String?
- 
-    var jsonResult:apiResult?
     
+    var identifier:String?
+    var jsonResult:jsonResultType?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+ 
+        self.automaticallyAdjustsScrollViewInsets = false
+         
+        guard let id = self.identifier else {
+            print("network error or no idenfitier found")
+            return
+        }
+
+        self.prettify()
+        
+        let url : String  = "https://itunes.apple.com/lookup?id=\(id)&country=kr"
+        
+        DispatchQueue.global(qos: .background).async {
+
+            APIService.sharedInstance.requestHttp(urlString: url) { (response, data) in
+                
+                //debugPrint(data)
+                
+                guard let data = data else {
+                    return
+                }
+                
+                do{
+                    if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
+                            
+                        if let topmost = json["results"] as? [Any] ,let topArr =  topmost.first as? jsonDic {
+                            
+                            do{
+                             
+                                let appModel =  try AppDetailModel(json: topArr)
+                                self.updateUI(appModel)
+                            
+                            }catch{
+                            
+                                print("exception :\(error)")
+                            }
+                        }
+                }
+
+                }catch{
+                    
+                     print("exception :\(error)")
+                }
+            }
+        }
+    }
+
     func updateUI(_ model:AppDetailModel){
         
         
-        DispatchQueue.global(qos: .background).async {
-            
+        
             DispatchQueue.main.async {
-            
+                
+                [unowned self] in
                 
                 self.titleLabel.text = model.trackName
                 self.contentRatingLabel.text = model.contentAdvisoryRating
                 
-                if let starVal = model.averageUserRatingForCurrentVersion {
-                   self.starLabel.text = String(repeating: "⭐️", count: starVal)
-                }else{
-                    self.starLabel.text = "no star!!"
-                }
                 self.makerLabel.text = model.artistName
                 
                 let imageUrl = URL(string:model.artworkUrl60)
                 self.thumbImageView.sd_setImage(with: imageUrl , completed: nil)
-            
+                
                 // What's new
                 self.descLabel.text = model.description
                 self.whatsNewLabel.text = model.releaseNotes
@@ -89,22 +133,43 @@ class AppInfoVC: UIViewController {
                 self.view.updateConstraintsIfNeeded()
                 //print("url:\(imageUrl)")
                 
- 
-//                let width = self.makerLabel.bounds.size.width
-//                let labelHeight = PrettyUI.applyAttrLabelAndGetHeight( aString: model.artistName, label: self.makerLabel, lineSpacing: 3, width: width )
-//
-//                self.makerLabel.translatesAutoresizingMaskIntoConstraints = false
-//                self.descLabelHeightConstraint.constant = labelHeight
+                
+                //                let width = self.makerLabel.bounds.size.width
+                //                let labelHeight = PrettyUI.applyAttrLabelAndGetHeight( aString: model.artistName, label: self.makerLabel, lineSpacing: 3, width: width )
+                //
+                //                self.makerLabel.translatesAutoresizingMaskIntoConstraints = false
+                //                self.descLabelHeightConstraint.constant = labelHeight
+                
+                
+                
+                self.view.layoutIfNeeded()
+                
+                if let starVal = model.averageUserRatingForCurrentVersion {
+                    
+                    self.starLabel.text = "⭐️"
+                    
+                    UIView.animate(withDuration: 0.3,
+                                   delay: 0.0,
+                                   usingSpringWithDamping: 0.3,
+                                   initialSpringVelocity: 10.0,
+                                   options: .curveLinear,
+                                   animations: { () -> Void in
+                                    
+                                    self.starLabel.text = String(repeating: "⭐️", count: starVal)
+                                    
+                    }, completion: nil)
+                    
+                }else{
+                    self.starLabel.text = "🌨"
+                }
+                
 
                 
-               
-                
-                
                 for vc in self.childViewControllers{
-                     //print (view )
+                    //print (view )
                     if vc is AppImageCollectionVC {
                         
-                       let collectionVC = vc as! AppImageCollectionVC
+                        let collectionVC = vc as! AppImageCollectionVC
                         collectionVC.imageURLs = model.screenshotUrls
                         collectionVC.collectionView?.reloadData()
                         
@@ -112,18 +177,11 @@ class AppInfoVC: UIViewController {
                 }
                 
                 
-
+                
             }
-        }
+      
     }
-    
-//    override func updateViewConstraints() {
-//        super.updateViewConstraints()
-//        self.view.updateConstraintsIfNeeded()
-//        self.view.setNeedsLayout()
-//    }
- 
-    
+
     func prettify(){
         
         contentRatingLabel.layer.borderColor = UIColor.darkGray.cgColor
@@ -135,54 +193,6 @@ class AppInfoVC: UIViewController {
         
         
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
- 
-        self.automaticallyAdjustsScrollViewInsets = false
-     
-        debugPrint("id is\(self.identifier)")
-        
-        guard let id = self.identifier else {
-            
-            return
-        }
-
-        self.prettify()
-        
-        let url : String  = "https://itunes.apple.com/lookup?id=\(id)&country=kr"
-        
-        APIService.sharedInstance.requestHttp(urlString: url) { (response, data) in
-            
-            //debugPrint(data)
-            
-            guard let data = data else {
-                return
-            }
-            
-            do{
-                if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
-                        
-                    if let topmost = json["results"] as? [Any] ,let topArr =  topmost.first as? jsonDic {
-                        
-                        do{
-                         
-                            let appModel =  try AppDetailModel(json: topArr)
-                            self.updateUI(appModel)
-                        
-                        }catch{
-                        
-                            print("exception :\(error)")
-                        }
-                    }
-            }
-
-            }catch{
-                
-                 print("exception :\(error)")
-            }
-        }
-    }
-
     @IBAction func actionMoreDesc(_ sender: UIButton) {
         
         self.stackView.invalidateIntrinsicContentSize()

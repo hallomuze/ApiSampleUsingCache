@@ -72,28 +72,28 @@ struct AppDetailModel    {
     var currentVersionReleaseDate  : String
     var description: String
     
-    //var features : [String]?
+//    var features : [String]?
     
     var fileSizeBytes : String
 //    var formattedPrice : String
-    //var genreIds : [String] //   ( 6015, 6012 );
-    //var genres : [String]
-
-    //var ipadScreenshotUrls : [String]?
-  
+//    var genreIds : [String] //   ( 6015, 6012 );
+//    var genres : [String]
+//
+//    var ipadScreenshotUrls : [String]?
+//  
 //    var isGameCenterEnabled : String
 //    var isVppDeviceBasedLicensingEnabled : String
 //    var kind : String
-    //var languageCodesISO2A:[String]  // EN.
+//    var languageCodesISO2A:[String]  // EN.
 //    var minimumOsVersion : String
 //    var price : String
-    
-    
+//    
+//    
 //    var primaryGenreId : Int  주의.
     var primaryGenreName  : String
     var releaseDate : String
     var releaseNotes : String
-//
+ 
     var screenshotUrls : [String]
     var sellerName : String
     var sellerUrl : String?
@@ -236,6 +236,7 @@ extension AppDetailModel {
             throw jsonError.missing(trackName_suffix)
         }
         self.trackName = trackName
+        debugPrint("app name :\(trackName)")
         
         guard let trackViewUrl = json[trackViewUrl_suffix] as? String else {
             throw jsonError.missing(trackViewUrl_suffix)

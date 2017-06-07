@@ -13,7 +13,8 @@ class ImagesCollectionCell: UICollectionViewCell {
     @IBOutlet weak var appImageView: UIImageView!
     
     override func awakeFromNib() {
-        self.backgroundColor = UIColor.lightGray
+       
+        self.appImageView.backgroundColor = UIColor.lightGray
 
         self.appImageView.layer.borderWidth = 0.5
         self.appImageView.layer.borderColor = UIColor.lightGray.cgColor
