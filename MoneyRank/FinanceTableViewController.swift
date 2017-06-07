@@ -161,6 +161,17 @@ class FinanceTableViewController: UITableViewController {
 
 /*
  
+ 해야할 일
+ 
+ 
+ SDWeb image  제거하기
+ 주석제거하기
+ layoutIfneeded필요시 삭제
+ 애니메이션 디버깅( 시간남으면 )
+ stackover 에서 가져온 소스 내걸로 만들기, 보기좋게 수정하기
+ 
+ 
+ 
  애플에서 JSON 처리법
  
  https://developer.apple.com/swift/blog/?id=37

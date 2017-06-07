@@ -51,6 +51,7 @@ class AppInfoVC: UIViewController {
     let kScreenHeight = UIScreen.main.bounds.height
     let kPhoneRatio = UIScreen.main.bounds.height / UIScreen.main.bounds.width
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
  
@@ -73,10 +74,8 @@ class AppInfoVC: UIViewController {
         
         DispatchQueue.global(qos: .background).async {
 
-            APIService.sharedInstance.requestHttp(urlString: url) { (response, data) in
-                
-                //debugPrint(data)
-                
+            APIService.sharedInstance.requestHttp(urlString: url) { [unowned self] (response, data) in
+                 
                 guard let data = data else {
                     return
                 }
@@ -106,13 +105,10 @@ class AppInfoVC: UIViewController {
         }
     }
 
+    // MARK - updateUI
     func updateUI(_ model:AppDetailModel){
         
-        
-        
-            DispatchQueue.main.async {
-                
-                [unowned self] in
+            DispatchQueue.main.async { [unowned self] in
                 
                 self.titleLabel.text = model.trackName
                 self.contentRatingLabel.text = model.contentAdvisoryRating
@@ -131,32 +127,19 @@ class AppInfoVC: UIViewController {
                 self.developerLabel.text = model.artistName
                 self.categoryLabel.text = model.primaryGenreName
                 self.updatedLastLabel.text = model.currentVersionReleaseDate
-                //self.sizeOfAppLabel.text = model.f
-                //self.langLabel.text = model.
                 
-                let fileSizeAsInt = Int64(model.fileSizeBytes)
+                if let fileSizeAsInt = Int64(model.fileSizeBytes) {
+                   
+                    let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount:fileSizeAsInt, countStyle: .file)
+                    self.sizeOfAppLabel.text = "\(fileSizeWithUnit)"
+                }
                 
-                let fileSizeWithUnit = ByteCountFormatter.string(fromByteCount:fileSizeAsInt!, countStyle: .file)
-                //print("File Size: \(fileSizeWithUnit)")
-                self.sizeOfAppLabel.text = "\(fileSizeWithUnit)"
-                
-                
-                //self.view.layoutIfNeeded()
-                //self.view.updateConstraintsIfNeeded()
-                
-                
-                
-                // self.view.layoutIfNeeded()
-
-           
                 if let starVal = model.averageUserRatingForCurrentVersion {
                          self.fillStarContainer(rating: starVal)
                 }
-                
-
-                
+            
                 for vc in self.childViewControllers{
-                    //print (view )
+                 
                     if vc is AppImageCollectionVC {
                         
                         let collectionVC = vc as! AppImageCollectionVC
@@ -165,23 +148,19 @@ class AppInfoVC: UIViewController {
                         
                     }
                 }
-                
-                
-                
-            }
-      
+        }
     }
 
     func prettify(){
-        
         contentRatingLabel.layer.borderColor = UIColor.darkGray.cgColor
         contentRatingLabel.layer.borderWidth = 1
-        
         thumbImageView.layer.cornerRadius = 25
         thumbImageView.layer.borderColor = UIColor.lightGray.cgColor
         thumbImageView.layer.borderWidth = 1
-         
     }
+    
+    // MARK: actionMoreDesc
+    
     @IBAction func actionMoreDesc(_ sender: UIButton) {
         
         self.stackView.invalidateIntrinsicContentSize()
@@ -193,9 +172,11 @@ class AppInfoVC: UIViewController {
         
     }
     
+    // MARK: star rating
+    
     func fillStarContainer(rating:Int){
   
-        //Stack View
+        //Stack View 생성
         let stackView   = UIStackView(  )
         stackView.axis  = UILayoutConstraintAxis.horizontal
         stackView.distribution  = UIStackViewDistribution.equalSpacing
@@ -204,6 +185,7 @@ class AppInfoVC: UIViewController {
         
         let kImageViewSize:CGFloat = 13.0
         
+        //star image 생성
         for _ in 0..<5{
             
             let imageView = UIImageView()
@@ -217,7 +199,6 @@ class AppInfoVC: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false;
         self.starContainerView.addSubview(stackView)
         
-        //Constraints
         stackView.widthAnchor.constraint(equalToConstant:  15*5 ).isActive = true
         stackView.heightAnchor.constraint(equalToConstant: 15 ).isActive = true
         stackView.centerYAnchor.constraint(equalTo: self.starContainerView.centerYAnchor).isActive = true
@@ -240,14 +221,9 @@ class AppInfoVC: UIViewController {
                                 }
                                 
                 }, completion: nil)
-                
-                
             }
         }
-        
-        
-
-    }
+    } //end of fillStar func
    
 
 }

@@ -54,15 +54,14 @@ class PrettyUI: NSObject {
 extension UIImageView {
     public func imageFromServerURL(urlString: String) {
         
-        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
+        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { [unowned self] (data, response, error) -> Void in
             
             if error != nil {
-                print(error)
+                print("error is \(error)")
                 return
             }
             
-            
-            DispatchQueue.main.async(execute: { [unowned self] in
+            DispatchQueue.main.async(execute: {
                 
                 let image = UIImage(data: data!)
                 self.image = image
@@ -73,7 +72,9 @@ extension UIImageView {
 }
 
 extension String {
+    
     func image() -> UIImage {
+        
         let size = CGSize(width: 30, height: 30)
         UIGraphicsBeginImageContextWithOptions(size, false, 0);
         UIColor.white.set()
@@ -85,8 +86,6 @@ extension String {
         return image!
     }
     
-    
-    
 }
 
 extension UIImage{
@@ -95,8 +94,8 @@ extension UIImage{
         
         let filter = CIFilter(name: "CIPhotoEffectMono")  //
         
-        let ciInput = CIImage(image: self)
-        filter?.setValue(ciInput, forKey: "inputImage")
+        let ciSource = CIImage(image: self)
+        filter?.setValue(ciSource, forKey: "inputImage")
         
         // get output CIImage, render as CGImage first to retain proper UIImage scale
         

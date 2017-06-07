@@ -38,7 +38,7 @@ public class APIService: NSObject {
             configuration:sessionConfiguration, delegate: nil, delegateQueue: nil)
         
         let sessionTask = urlSession.dataTask(with:request){
-            (data,response,error) in
+            [unowned self] (data,response,error) in
             
             handler(response,data)
         }

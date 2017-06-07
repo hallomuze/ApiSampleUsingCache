@@ -22,13 +22,13 @@ class RankCell: UITableViewCell {
         self.appImageView.layer.borderWidth = 0.5
         self.appImageView.layer.borderColor = UIColor.lightGray.cgColor
         self.appImageView.clipsToBounds = true
-
     }
  
     public func bindData (_ model: BankAppModel , rank:Int ){
         self.titleLabel?.text = model.title
         self.rankLabel?.text = "\(rank)"
         
+        //if use SDWeb
         //guard let imageUrl = model.images.last?.url else { return }
         //self.appImageView.sd_setImage(with: imageUrl , completed: nil)
         
